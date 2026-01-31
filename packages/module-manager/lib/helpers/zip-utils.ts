@@ -1,4 +1,4 @@
-import { streamFileToZip } from '@extension/dev-utils';
+import { streamFileToZip } from '@repo/dev-utils';
 import fg from 'fast-glob';
 import { unzipSync, Zip } from 'fflate';
 import { rimraf } from 'rimraf';

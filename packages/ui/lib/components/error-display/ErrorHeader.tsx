@@ -1,4 +1,4 @@
-import { t } from '@extension/i18n';
+import { t } from '@repo/i18n';
 
 // FIXME: IMPORT SVG ICON INSTEAD OF DEFINING INLINE IT HERE
 const WarningIcon = ({ className }: { className: string }) => (

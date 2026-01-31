@@ -71,7 +71,7 @@ export default config(
         'error',
         {
           name: 'type-fest',
-          message: 'Please import from `@extension/shared` instead of `type-fest`.',
+          message: 'Please import from `@repo/shared` instead of `type-fest`.',
         },
       ],
       'arrow-body-style': ['error', 'as-needed'],

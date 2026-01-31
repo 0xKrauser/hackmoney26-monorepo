@@ -1,6 +1,6 @@
 import { config as baseConfig } from './wdio.conf.js';
 import { getChromeExtensionPath, getFirefoxExtensionPath } from '../utils/extension-path.js';
-import { IS_CI, IS_FIREFOX } from '@extension/env';
+import { IS_CI, IS_FIREFOX } from '@repo/env';
 import { readdir, readFile } from 'node:fs/promises';
 import { extname, join } from 'node:path';
 

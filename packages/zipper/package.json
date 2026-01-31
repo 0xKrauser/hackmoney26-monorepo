@@ -1,5 +1,5 @@
 {
-  "name": "@extension/zipper",
+  "name": "@repo/zipper",
   "version": "0.5.0",
   "description": "chrome extension - zipper",
   "type": "module",
@@ -23,8 +23,8 @@
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
-    "@extension/tsconfig": "workspace:*",
-    "@extension/dev-utils": "workspace:*",
-    "@extension/env": "workspace:*"
+    "@repo/tsconfig": "workspace:*",
+    "@repo/dev-utils": "workspace:*",
+    "@repo/env": "workspace:*"
   }
 }

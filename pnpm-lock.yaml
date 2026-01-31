@@ -141,34 +141,34 @@ importers:
 
   chrome-extension:
     dependencies:
-      '@extension/env':
+      '@repo/env':
         specifier: workspace:*
         version: link:../packages/env
-      '@extension/shared':
+      '@repo/shared':
         specifier: workspace:*
         version: link:../packages/shared
-      '@extension/storage':
+      '@repo/storage':
         specifier: workspace:*
         version: link:../packages/storage
       webextension-polyfill:
         specifier: ^0.12.0
         version: 0.12.0
     devDependencies:
-      '@extension/dev-utils':
-        specifier: workspace:*
-        version: link:../packages/dev-utils
-      '@extension/hmr':
-        specifier: workspace:*
-        version: link:../packages/hmr
-      '@extension/tsconfig':
-        specifier: workspace:*
-        version: link:../packages/tsconfig
-      '@extension/vite-config':
-        specifier: workspace:*
-        version: link:../packages/vite-config
       '@laynezh/vite-plugin-lib-assets':
         specifier: ^1.1.0
         version: 1.2.0(vite@6.3.6(@types/node@24.3.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.92.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))
+      '@repo/dev-utils':
+        specifier: workspace:*
+        version: link:../packages/dev-utils
+      '@repo/hmr':
+        specifier: workspace:*
+        version: link:../packages/hmr
+      '@repo/tsconfig':
+        specifier: workspace:*
+        version: link:../packages/tsconfig
+      '@repo/vite-config':
+        specifier: workspace:*
+        version: link:../packages/vite-config
       magic-string:
         specifier: ^0.30.17
         version: 0.30.21
@@ -178,10 +178,10 @@ importers:
 
   packages/dev-utils:
     devDependencies:
-      '@extension/shared':
+      '@repo/shared':
         specifier: workspace:*
         version: link:../shared
-      '@extension/tsconfig':
+      '@repo/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
 
@@ -191,16 +191,16 @@ importers:
         specifier: ^1.44.1
         version: 1.49.0
     devDependencies:
-      '@extension/tsconfig':
+      '@repo/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
 
   packages/hmr:
     devDependencies:
-      '@extension/env':
+      '@repo/env':
         specifier: workspace:*
         version: link:../env
-      '@extension/tsconfig':
+      '@repo/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
       '@rollup/plugin-sucrase':
@@ -227,28 +227,28 @@ importers:
 
   packages/i18n:
     dependencies:
-      '@extension/env':
+      '@repo/env':
         specifier: workspace:*
         version: link:../env
     devDependencies:
-      '@extension/tsconfig':
+      '@repo/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
 
   packages/module-manager:
     devDependencies:
-      '@extension/dev-utils':
-        specifier: workspace:*
-        version: link:../dev-utils
-      '@extension/shared':
-        specifier: workspace:*
-        version: link:../shared
-      '@extension/tsconfig':
-        specifier: workspace:*
-        version: link:../tsconfig
       '@inquirer/prompts':
         specifier: ^7.5.1
         version: 7.8.4(@types/node@24.3.1)
+      '@repo/dev-utils':
+        specifier: workspace:*
+        version: link:../dev-utils
+      '@repo/shared':
+        specifier: workspace:*
+        version: link:../shared
+      '@repo/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
       '@types/yargs':
         specifier: ^17.0.33
         version: 17.0.33
@@ -265,10 +265,10 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0(react@19.2.3)
     devDependencies:
-      '@extension/storage':
+      '@repo/storage':
         specifier: workspace:*
         version: link:../storage
-      '@extension/tsconfig':
+      '@repo/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
       type-fest:
@@ -277,13 +277,13 @@ importers:
 
   packages/storage:
     devDependencies:
-      '@extension/tsconfig':
+      '@repo/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
 
   packages/tailwindcss-config:
     devDependencies:
-      '@extension/tsconfig':
+      '@repo/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
 
@@ -291,13 +291,13 @@ importers:
 
   packages/ui:
     dependencies:
-      '@extension/i18n':
+      '@repo/i18n':
         specifier: workspace:*
         version: link:../i18n
-      '@extension/shared':
+      '@repo/shared':
         specifier: workspace:*
         version: link:../shared
-      '@extension/storage':
+      '@repo/storage':
         specifier: workspace:*
         version: link:../storage
       clsx:
@@ -307,10 +307,10 @@ importers:
         specifier: ^3.3.0
         version: 3.3.1
     devDependencies:
-      '@extension/tailwindcss-config':
+      '@repo/tailwindcss-config':
         specifier: workspace:*
         version: link:../tailwindcss-config
-      '@extension/tsconfig':
+      '@repo/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
       react-spinners:
@@ -322,14 +322,14 @@ importers:
 
   packages/vite-config:
     dependencies:
-      '@extension/env':
+      '@repo/env':
         specifier: workspace:*
         version: link:../env
     devDependencies:
-      '@extension/hmr':
+      '@repo/hmr':
         specifier: workspace:*
         version: link:../hmr
-      '@extension/tsconfig':
+      '@repo/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
       '@vitejs/plugin-react-swc':
@@ -338,123 +338,148 @@ importers:
 
   packages/zipper:
     devDependencies:
-      '@extension/dev-utils':
+      '@repo/dev-utils':
         specifier: workspace:*
         version: link:../dev-utils
-      '@extension/env':
+      '@repo/env':
         specifier: workspace:*
         version: link:../env
-      '@extension/tsconfig':
+      '@repo/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
 
   pages/content:
     dependencies:
-      '@extension/env':
+      '@repo/env':
         specifier: workspace:*
         version: link:../../packages/env
-      '@extension/shared':
+      '@repo/shared':
         specifier: workspace:*
         version: link:../../packages/shared
-      '@extension/storage':
+      '@repo/storage':
         specifier: workspace:*
         version: link:../../packages/storage
     devDependencies:
-      '@extension/hmr':
+      '@repo/hmr':
         specifier: workspace:*
         version: link:../../packages/hmr
-      '@extension/tsconfig':
+      '@repo/tsconfig':
         specifier: workspace:*
         version: link:../../packages/tsconfig
-      '@extension/vite-config':
+      '@repo/vite-config':
         specifier: workspace:*
         version: link:../../packages/vite-config
 
   pages/content-runtime:
     dependencies:
-      '@extension/env':
+      '@repo/env':
         specifier: workspace:*
         version: link:../../packages/env
-      '@extension/ui':
+      '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
     devDependencies:
-      '@extension/hmr':
+      '@repo/hmr':
         specifier: workspace:*
         version: link:../../packages/hmr
-      '@extension/shared':
+      '@repo/shared':
         specifier: workspace:*
         version: link:../../packages/shared
-      '@extension/tsconfig':
+      '@repo/tsconfig':
         specifier: workspace:*
         version: link:../../packages/tsconfig
-      '@extension/vite-config':
+      '@repo/vite-config':
         specifier: workspace:*
         version: link:../../packages/vite-config
 
   pages/content-ui:
     dependencies:
-      '@extension/env':
+      '@repo/env':
         specifier: workspace:*
         version: link:../../packages/env
-      '@extension/i18n':
+      '@repo/i18n':
         specifier: workspace:*
         version: link:../../packages/i18n
-      '@extension/shared':
+      '@repo/shared':
         specifier: workspace:*
         version: link:../../packages/shared
-      '@extension/ui':
+      '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
     devDependencies:
-      '@extension/hmr':
+      '@repo/hmr':
         specifier: workspace:*
         version: link:../../packages/hmr
-      '@extension/tailwindcss-config':
+      '@repo/tailwindcss-config':
         specifier: workspace:*
         version: link:../../packages/tailwindcss-config
-      '@extension/tsconfig':
+      '@repo/tsconfig':
         specifier: workspace:*
         version: link:../../packages/tsconfig
-      '@extension/vite-config':
+      '@repo/vite-config':
         specifier: workspace:*
         version: link:../../packages/vite-config
 
   pages/devtools:
     dependencies:
-      '@extension/shared':
+      '@repo/shared':
         specifier: workspace:*
         version: link:../../packages/shared
     devDependencies:
-      '@extension/tsconfig':
+      '@repo/tsconfig':
         specifier: workspace:*
         version: link:../../packages/tsconfig
-      '@extension/vite-config':
+      '@repo/vite-config':
         specifier: workspace:*
         version: link:../../packages/vite-config
 
   pages/devtools-panel:
     dependencies:
-      '@extension/i18n':
+      '@repo/i18n':
         specifier: workspace:*
         version: link:../../packages/i18n
-      '@extension/shared':
+      '@repo/shared':
         specifier: workspace:*
         version: link:../../packages/shared
-      '@extension/storage':
+      '@repo/storage':
         specifier: workspace:*
         version: link:../../packages/storage
-      '@extension/ui':
+      '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
     devDependencies:
-      '@extension/tailwindcss-config':
+      '@repo/tailwindcss-config':
         specifier: workspace:*
         version: link:../../packages/tailwindcss-config
-      '@extension/tsconfig':
+      '@repo/tsconfig':
         specifier: workspace:*
         version: link:../../packages/tsconfig
-      '@extension/vite-config':
+      '@repo/vite-config':
+        specifier: workspace:*
+        version: link:../../packages/vite-config
+
+  pages/inline-reactions:
+    dependencies:
+      '@repo/i18n':
+        specifier: workspace:*
+        version: link:../../packages/i18n
+      '@repo/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
+      '@repo/storage':
+        specifier: workspace:*
+        version: link:../../packages/storage
+      '@repo/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+    devDependencies:
+      '@repo/tailwindcss-config':
+        specifier: workspace:*
+        version: link:../../packages/tailwindcss-config
+      '@repo/tsconfig':
+        specifier: workspace:*
+        version: link:../../packages/tsconfig
+      '@repo/vite-config':
         specifier: workspace:*
         version: link:../../packages/vite-config
 
@@ -498,115 +523,62 @@ importers:
         specifier: ^5
         version: 5.9.2
 
-  pages/new-tab:
-    dependencies:
-      '@extension/i18n':
-        specifier: workspace:*
-        version: link:../../packages/i18n
-      '@extension/shared':
-        specifier: workspace:*
-        version: link:../../packages/shared
-      '@extension/storage':
-        specifier: workspace:*
-        version: link:../../packages/storage
-      '@extension/ui':
-        specifier: workspace:*
-        version: link:../../packages/ui
-    devDependencies:
-      '@extension/tailwindcss-config':
-        specifier: workspace:*
-        version: link:../../packages/tailwindcss-config
-      '@extension/tsconfig':
-        specifier: workspace:*
-        version: link:../../packages/tsconfig
-      '@extension/vite-config':
-        specifier: workspace:*
-        version: link:../../packages/vite-config
-      sass:
-        specifier: ^1.89.0
-        version: 1.92.1
-
-  pages/options:
-    dependencies:
-      '@extension/i18n':
-        specifier: workspace:*
-        version: link:../../packages/i18n
-      '@extension/shared':
-        specifier: workspace:*
-        version: link:../../packages/shared
-      '@extension/storage':
-        specifier: workspace:*
-        version: link:../../packages/storage
-      '@extension/ui':
-        specifier: workspace:*
-        version: link:../../packages/ui
-    devDependencies:
-      '@extension/tailwindcss-config':
-        specifier: workspace:*
-        version: link:../../packages/tailwindcss-config
-      '@extension/tsconfig':
-        specifier: workspace:*
-        version: link:../../packages/tsconfig
-      '@extension/vite-config':
-        specifier: workspace:*
-        version: link:../../packages/vite-config
-
   pages/popup:
     dependencies:
-      '@extension/i18n':
+      '@repo/i18n':
         specifier: workspace:*
         version: link:../../packages/i18n
-      '@extension/shared':
+      '@repo/shared':
         specifier: workspace:*
         version: link:../../packages/shared
-      '@extension/storage':
+      '@repo/storage':
         specifier: workspace:*
         version: link:../../packages/storage
-      '@extension/ui':
+      '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
     devDependencies:
-      '@extension/tailwindcss-config':
+      '@repo/tailwindcss-config':
         specifier: workspace:*
         version: link:../../packages/tailwindcss-config
-      '@extension/tsconfig':
+      '@repo/tsconfig':
         specifier: workspace:*
         version: link:../../packages/tsconfig
-      '@extension/vite-config':
+      '@repo/vite-config':
         specifier: workspace:*
         version: link:../../packages/vite-config
 
   pages/side-panel:
     dependencies:
-      '@extension/i18n':
+      '@repo/i18n':
         specifier: workspace:*
         version: link:../../packages/i18n
-      '@extension/shared':
+      '@repo/shared':
         specifier: workspace:*
         version: link:../../packages/shared
-      '@extension/storage':
+      '@repo/storage':
         specifier: workspace:*
         version: link:../../packages/storage
-      '@extension/ui':
+      '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
     devDependencies:
-      '@extension/tailwindcss-config':
+      '@repo/tailwindcss-config':
         specifier: workspace:*
         version: link:../../packages/tailwindcss-config
-      '@extension/tsconfig':
+      '@repo/tsconfig':
         specifier: workspace:*
         version: link:../../packages/tsconfig
-      '@extension/vite-config':
+      '@repo/vite-config':
         specifier: workspace:*
         version: link:../../packages/vite-config
 
   tests/e2e:
     devDependencies:
-      '@extension/env':
+      '@repo/env':
         specifier: workspace:*
         version: link:../../packages/env
-      '@extension/tsconfig':
+      '@repo/tsconfig':
         specifier: workspace:*
         version: link:../../packages/tsconfig
       '@wdio/cli':
@@ -8614,7 +8586,8 @@ snapshots:
 
   immediate@3.0.6: {}
 
-  immutable@5.1.2: {}
+  immutable@5.1.2:
+    optional: true
 
   import-fresh@3.3.1:
     dependencies:
@@ -9877,6 +9850,7 @@ snapshots:
       source-map-js: 1.2.1
     optionalDependencies:
       '@parcel/watcher': 2.5.1
+    optional: true
 
   scheduler@0.27.0: {}
 

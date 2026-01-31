@@ -6,7 +6,7 @@ import { rimraf } from 'rimraf';
 import { existsSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import type { ChoicesType, ModuleNameType } from '../types.ts';
-import type { ManifestType } from '@extension/shared';
+import type { ManifestType } from '@repo/shared';
 
 export const recoverFeature = async (manifestObject: ManifestType, moduleName?: ModuleNameType) => {
   const archiveFiles = existsSync(archivePath) ? readdirSync(archivePath) : [];

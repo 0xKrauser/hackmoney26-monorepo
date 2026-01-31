@@ -6,7 +6,7 @@ import { execSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import type { CliActionType, ModuleNameType } from '../types.js';
-import type { ManifestType } from '@extension/shared';
+import type { ManifestType } from '@repo/shared';
 
 const manifestPath = resolve(import.meta.dirname, '..', '..', '..', '..', 'chrome-extension', 'manifest.ts');
 

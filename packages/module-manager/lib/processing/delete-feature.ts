@@ -4,7 +4,7 @@ import { processSelection } from '../helpers/utils.js';
 import { pagesPath, testsPath } from '../paths.js';
 import { existsSync, readdirSync } from 'node:fs';
 import type { ChoicesType, ModuleNameType } from '../types.ts';
-import type { ManifestType } from '@extension/shared';
+import type { ManifestType } from '@repo/shared';
 
 export const deleteFeature = async (manifestObject: ManifestType, moduleName?: ModuleNameType) => {
   const pageFolders = readdirSync(pagesPath);

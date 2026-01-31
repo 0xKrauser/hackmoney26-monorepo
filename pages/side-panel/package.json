@@ -1,7 +1,6 @@
 {
-  "name": "@extension/sidepanel",
-  "version": "0.5.0",
-  "description": "chrome extension - side panel",
+  "name": "@frens/side-panel",
+  "version": "0.0.1",
   "type": "module",
   "private": true,
   "sideEffects": true,
@@ -20,15 +19,15 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@extension/shared": "workspace:*",
-    "@extension/storage": "workspace:*",
-    "@extension/i18n": "workspace:*",
-    "@extension/ui": "workspace:*"
+    "@repo/shared": "workspace:*",
+    "@repo/storage": "workspace:*",
+    "@repo/i18n": "workspace:*",
+    "@repo/ui": "workspace:*"
   },
   "devDependencies": {
-    "@extension/tailwindcss-config": "workspace:*",
-    "@extension/tsconfig": "workspace:*",
-    "@extension/vite-config": "workspace:*"
+    "@repo/tailwindcss-config": "workspace:*",
+    "@repo/tsconfig": "workspace:*",
+    "@repo/vite-config": "workspace:*"
   },
   "postcss": {
     "plugins": {

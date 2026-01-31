@@ -24,8 +24,8 @@ To use the code in the package, you need to follow those steps:
    ```
    but with first solution, autofill should work for IDE:
    ![img.png](use-env-example.png)
-3. You are also able to import const like `IS_DEV` from `@extension/env` like:
+3. You are also able to import const like `IS_DEV` from `@repo/env` like:
    ```ts
-    import { IS_DEV } from '@extension/env';
+    import { IS_DEV } from '@repo/env';
     ```
    For more look [ENV CONST](lib/const.ts)

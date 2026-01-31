@@ -1,6 +1,6 @@
 import { DEFAULT_CHOICES_VALUES, EXIT_PROMPT_ERROR, MODULE_CONFIG } from '../const.js';
-import { colorfulLog } from '@extension/shared';
 import { select } from '@inquirer/prompts';
+import { colorfulLog } from '@repo/shared';
 import { readdirSync } from 'node:fs';
 import type { DELETE_CHOICE_QUESTION, RECOVER_CHOICE_QUESTION } from '../const.js';
 import type {
@@ -10,7 +10,7 @@ import type {
   ModuleNameType,
   WritableModuleConfigValuesType,
 } from '../types.js';
-import type { ConditionalPickDeep, Entries, ManifestType } from '@extension/shared';
+import type { ConditionalPickDeep, Entries, ManifestType } from '@repo/shared';
 import type { Arguments } from 'yargs';
 
 export const isFolderEmpty = (path: string) => !readdirSync(path).length;

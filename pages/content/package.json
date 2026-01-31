@@ -1,5 +1,5 @@
 {
-  "name": "@extension/content-script",
+  "name": "@repo/content-script",
   "version": "0.5.0",
   "description": "chrome extension - content script",
   "type": "module",
@@ -21,13 +21,13 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@extension/shared": "workspace:*",
-    "@extension/storage": "workspace:*",
-    "@extension/env": "workspace:*"
+    "@repo/shared": "workspace:*",
+    "@repo/storage": "workspace:*",
+    "@repo/env": "workspace:*"
   },
   "devDependencies": {
-    "@extension/hmr": "workspace:*",
-    "@extension/tsconfig": "workspace:*",
-    "@extension/vite-config": "workspace:*"
+    "@repo/hmr": "workspace:*",
+    "@repo/tsconfig": "workspace:*",
+    "@repo/vite-config": "workspace:*"
   }
 }

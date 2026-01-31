@@ -1,5 +1,5 @@
 {
-  "name": "@extension/storage",
+  "name": "@repo/storage",
   "version": "0.5.0",
   "description": "chrome extension - storage",
   "type": "module",
@@ -22,6 +22,6 @@
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
-    "@extension/tsconfig": "workspace:*"
+    "@repo/tsconfig": "workspace:*"
   }
 }

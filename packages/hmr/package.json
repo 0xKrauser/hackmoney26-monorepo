@@ -1,5 +1,5 @@
 {
-  "name": "@extension/hmr",
+  "name": "@repo/hmr",
   "version": "0.5.0",
   "description": "chrome extension - hot module reload/refresh",
   "type": "module",
@@ -23,8 +23,8 @@
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
-    "@extension/env": "workspace:*",
-    "@extension/tsconfig": "workspace:*",
+    "@repo/env": "workspace:*",
+    "@repo/tsconfig": "workspace:*",
     "@rollup/plugin-sucrase": "^5.0.2",
     "@types/ws": "^8.18.1",
     "esbuild": "^0.25.4",

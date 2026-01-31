@@ -1,5 +1,5 @@
 import { resolve } from 'node:path';
-import { withPageConfig } from '@extension/vite-config';
+import { withPageConfig } from '@repo/vite-config';
 
 const rootDir = resolve(import.meta.dirname);
 const srcDir = resolve(rootDir, 'src');

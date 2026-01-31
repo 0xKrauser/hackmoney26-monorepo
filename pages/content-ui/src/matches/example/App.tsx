@@ -1,5 +1,5 @@
-import { t } from '@extension/i18n';
-import { ToggleButton } from '@extension/ui';
+import { t } from '@repo/i18n';
+import { ToggleButton } from '@repo/ui';
 import { useEffect } from 'react';
 
 export default function App() {

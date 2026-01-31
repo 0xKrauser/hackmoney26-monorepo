@@ -4,6 +4,11 @@ packages:
   - packages/*
   - tests/*
 
+catalog:
+  autoprefixer: ^10.4.21
+  postcss: ^8.5.3
+  tailwindcss: ^3.4.17
+
 onlyBuiltDependencies:
   - '@parcel/watcher'
   - '@swc/core'

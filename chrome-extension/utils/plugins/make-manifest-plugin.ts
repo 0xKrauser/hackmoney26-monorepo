@@ -1,11 +1,11 @@
-import { ManifestParser } from '@extension/dev-utils';
-import { IS_DEV, IS_FIREFOX } from '@extension/env';
-import { colorfulLog } from '@extension/shared';
+import { ManifestParser } from '@repo/dev-utils';
+import { IS_DEV, IS_FIREFOX } from '@repo/env';
+import { colorfulLog } from '@repo/shared';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { platform } from 'node:process';
 import { pathToFileURL } from 'node:url';
-import type { ManifestType } from '@extension/shared';
+import type { ManifestType } from '@repo/shared';
 import type { PluginOption } from 'vite';
 
 const manifestFile = resolve(import.meta.dirname, '..', '..', 'manifest.js');

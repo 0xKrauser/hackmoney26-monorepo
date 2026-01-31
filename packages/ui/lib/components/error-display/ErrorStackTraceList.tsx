@@ -1,4 +1,4 @@
-import { t } from '@extension/i18n';
+import { t } from '@repo/i18n';
 
 export const ErrorStackTraceList = ({ error }: { error?: Error }) => (
   <div className="overflow-hidden rounded-lg bg-white shadow">

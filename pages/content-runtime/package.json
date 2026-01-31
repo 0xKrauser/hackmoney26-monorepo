@@ -1,5 +1,5 @@
 {
-  "name": "@extension/content-runtime-script",
+  "name": "@repo/content-runtime-script",
   "version": "0.5.0",
   "description": "chrome extension - content runtime script",
   "type": "module",
@@ -20,13 +20,13 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@extension/env": "workspace:*",
-    "@extension/ui": "workspace:*"
+    "@repo/env": "workspace:*",
+    "@repo/ui": "workspace:*"
   },
   "devDependencies": {
-    "@extension/tsconfig": "workspace:*",
-    "@extension/vite-config": "workspace:*",
-    "@extension/hmr": "workspace:*",
-    "@extension/shared": "workspace:*"
+    "@repo/tsconfig": "workspace:*",
+    "@repo/vite-config": "workspace:*",
+    "@repo/hmr": "workspace:*",
+    "@repo/shared": "workspace:*"
   }
 }

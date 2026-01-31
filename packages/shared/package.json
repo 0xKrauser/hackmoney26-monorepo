@@ -1,5 +1,5 @@
 {
-  "name": "@extension/shared",
+  "name": "@repo/shared",
   "version": "0.5.0",
   "description": "chrome extension - shared code",
   "type": "module",
@@ -26,8 +26,8 @@
     "react-error-boundary": "^6.0.0"
   },
   "devDependencies": {
-    "@extension/storage": "workspace:*",
-    "@extension/tsconfig": "workspace:*",
+    "@repo/storage": "workspace:*",
+    "@repo/tsconfig": "workspace:*",
     "type-fest": "^4.41.0"
   }
 }

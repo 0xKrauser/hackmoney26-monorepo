@@ -15,7 +15,7 @@ Add the following to the dependencies in `package.json`.
 ```json
 {
   "dependencies": {
-    "@extension/ui": "workspace:*"
+    "@repo/ui": "workspace:*"
   }
 }
 ```
@@ -29,8 +29,8 @@ pnpm install
 Add the following to the `tailwind.config.ts` file.
 
 ```ts
-import baseConfig from '@extension/tailwindcss-config';
-import { withUI } from '@extension/ui';
+import baseConfig from '@repo/tailwindcss-config';
+import { withUI } from '@repo/ui';
 
 export default withUI({
   ...baseConfig,
@@ -41,7 +41,7 @@ export default withUI({
 Add the following to the first line of `index.css` file.
 
 ```css
-@import '@extension/ui/global.css';
+@import '@repo/ui/global.css';
 ```
 
 ## Add Custom Component
@@ -68,7 +68,7 @@ export const CustomComponent = ({ children, ...props }: CustomComponentProps) =>
 ## Usage
 
 ```tsx
-import { CustomComponent, ErrorDisplay, LoadingSpinner } from '@extension/ui';
+import { CustomComponent, ErrorDisplay, LoadingSpinner } from '@repo/ui';
 
 const Page = () => {
   return <CustomComponent>Hi, I'm a custom component.</CustomComponent>;
@@ -144,7 +144,7 @@ You can refer to the this [manual guide](https://ui.shadcn.com/docs/installation
       return deepmerge(
         shadcnConfig,
         deepmerge(tailwindConfig, {
-          content: ['./node_modules/@extension/ui/lib/**/*.{tsx,ts,js,jsx}'],
+          content: ['./node_modules/@repo/ui/lib/**/*.{tsx,ts,js,jsx}'],
         }),
       );
     }
@@ -318,7 +318,7 @@ export * from './lib/components/ui/button';
 If you want to use shadcn components in content-ui ShadowDOM, you need to import ui package's global.css in the content-ui `tailwind-input.css`
 
 ```css
-@import '@extension/ui/lib/global.css';
+@import '@repo/ui/lib/global.css';
 
 @tailwind base;
 @tailwind components;
@@ -328,7 +328,7 @@ If you want to use shadcn components in content-ui ShadowDOM, you need to import
 If you want to use shadcn components in other pages, you need to import ui package's global.css in the `src/index.css`
 
 ```css
-@import '@extension/ui/lib/global.css';
+@import '@repo/ui/lib/global.css';
 
 @tailwind base;
 @tailwind components;

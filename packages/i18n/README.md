@@ -11,7 +11,7 @@ If you want to use the i18n translation function in each pages, you need to add 
 ```json
 {
   "dependencies": {
-    "@extension/i18n": "workspace:*"
+    "@repo/i18n": "workspace:*"
   }
 }
 ```
@@ -57,13 +57,13 @@ Create folder inside `locales` with name from [languages](https://developer.chro
 Just import the `t` function and use it to translate the key.
 
 ```typescript
-import { t } from '@extension/i18n';
+import { t } from '@repo/i18n';
 
 console.log(t('loading')); // Loading...
 ```
 
 ```typescript jsx
-import { t } from '@extension/i18n';
+import { t } from '@repo/i18n';
 
 const Component = () => {
   return (
@@ -127,7 +127,7 @@ If you want to replace the placeholder, you can pass the value as the second arg
 Function `t` has exactly the same interface as the `chrome.i18n.getMessage` function.
 
 ```typescript
-import { t } from '@extension/i18n';
+import { t } from '@repo/i18n';
 
 console.log(t('greeting', 'John Doe')); // Hello, My name is John Doe
 console.log(t('greeting', ['John Doe'])); // Hello, My name is John Doe
@@ -166,7 +166,7 @@ When you forget to add a key to all language's `messages.json` files, you will g
 ```
 
 ```typescript
-import { t } from '@extension/i18n';
+import { t } from '@repo/i18n';
 
 // Error: TS2345: Argument of type "hello" is not assignable to parameter of type
 console.log(t('hello'));

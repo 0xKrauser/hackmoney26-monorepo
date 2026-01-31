@@ -1,6 +1,6 @@
 import { withPageConfig } from './index.js';
-import { IS_DEV } from '@extension/env';
-import { makeEntryPointPlugin } from '@extension/hmr';
+import { IS_DEV } from '@repo/env';
+import { makeEntryPointPlugin } from '@repo/hmr';
 import { build as buildTW } from 'tailwindcss/lib/cli/build';
 import { build } from 'vite';
 import { readdirSync, statSync } from 'node:fs';

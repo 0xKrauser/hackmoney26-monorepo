@@ -19,16 +19,16 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@extension/env": "workspace:*",
-    "@extension/shared": "workspace:*",
-    "@extension/storage": "workspace:*",
+    "@repo/env": "workspace:*",
+    "@repo/shared": "workspace:*",
+    "@repo/storage": "workspace:*",
     "webextension-polyfill": "^0.12.0"
   },
   "devDependencies": {
-    "@extension/dev-utils": "workspace:*",
-    "@extension/hmr": "workspace:*",
-    "@extension/tsconfig": "workspace:*",
-    "@extension/vite-config": "workspace:*",
+    "@repo/dev-utils": "workspace:*",
+    "@repo/hmr": "workspace:*",
+    "@repo/tsconfig": "workspace:*",
+    "@repo/vite-config": "workspace:*",
     "@laynezh/vite-plugin-lib-assets": "^1.1.0",
     "magic-string": "^0.30.17",
     "ts-loader": "^9.5.2"

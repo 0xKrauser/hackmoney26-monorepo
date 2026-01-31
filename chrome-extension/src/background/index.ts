@@ -1,5 +1,5 @@
 import 'webextension-polyfill';
-import { exampleThemeStorage } from '@extension/storage';
+import { exampleThemeStorage } from '@repo/storage';
 
 exampleThemeStorage.get().then(theme => {
   console.log('theme', theme);

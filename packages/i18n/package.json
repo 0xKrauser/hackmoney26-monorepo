@@ -1,5 +1,5 @@
 {
-  "name": "@extension/i18n",
+  "name": "@repo/i18n",
   "version": "0.5.0",
   "description": "chrome extension - internationalization",
   "type": "module",
@@ -22,9 +22,9 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@extension/env": "workspace:*"
+    "@repo/env": "workspace:*"
   },
   "devDependencies": {
-    "@extension/tsconfig": "workspace:*"
+    "@repo/tsconfig": "workspace:*"
   }
 }

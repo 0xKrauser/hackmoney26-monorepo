@@ -1,11 +1,11 @@
 {
   "extensionDescription": {
     "description": "Extension description",
-    "message": "Chrome extension boilerplate developed with Vite, React and Typescript"
+    "message": "Frens is a Chrome extension that allows you to react with memecoins to posts on X."
   },
   "extensionName": {
     "description": "Extension name",
-    "message": "Chrome extension boilerplate"
+    "message": "Frens"
   },
   "toggleTheme": {
     "message": "Toggle theme"

@@ -1,8 +1,8 @@
 import '@src/SidePanel.css';
-import { t } from '@extension/i18n';
-import { PROJECT_URL_OBJECT, useStorage, withErrorBoundary, withSuspense } from '@extension/shared';
-import { exampleThemeStorage } from '@extension/storage';
-import { cn, ErrorDisplay, LoadingSpinner, ToggleButton } from '@extension/ui';
+import { t } from '@repo/i18n';
+import { PROJECT_URL_OBJECT, useStorage, withErrorBoundary, withSuspense } from '@repo/shared';
+import { exampleThemeStorage } from '@repo/storage';
+import { cn, ErrorDisplay, LoadingSpinner, ToggleButton } from '@repo/ui';
 
 const SidePanel = () => {
   const { isLight } = useStorage(exampleThemeStorage);

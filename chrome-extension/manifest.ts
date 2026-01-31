@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import type { ManifestType } from '@extension/shared';
+import type { ManifestType } from '@repo/shared';
 
 const packageJson = JSON.parse(readFileSync('./package.json', 'utf8'));
 
@@ -49,27 +49,10 @@ const manifest = {
   },
   content_scripts: [
     {
-      matches: ['http://*/*', 'https://*/*', '<all_urls>'],
-      js: ['content/all.iife.js'],
-    },
-    {
-      matches: ['https://example.com/*'],
-      js: ['content/example.iife.js'],
-    },
-    {
-      matches: ['http://*/*', 'https://*/*', '<all_urls>'],
-      js: ['content-ui/all.iife.js'],
-    },
-    {
-      matches: ['https://example.com/*'],
-      js: ['content-ui/example.iife.js'],
-    },
-    {
-      matches: ['http://*/*', 'https://*/*', '<all_urls>'],
-      css: ['content.css'],
+      matches: ['https://x.com/*', 'https://www.x.com/*'],
+      js: ['inline-reactions/index.iife.js'],
     },
   ],
-  devtools_page: 'devtools/index.html',
   web_accessible_resources: [
     {
       resources: ['*.js', '*.css', '*.svg', 'icon-128.png', 'icon-34.png'],

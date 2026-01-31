@@ -1,5 +1,5 @@
 import { resolve } from 'node:path';
-import { withPageConfig } from '@extension/vite-config';
+import { withPageConfig } from '@repo/vite-config';
 
 const rootDir = resolve(import.meta.dirname);
 const srcDir = resolve(rootDir, 'src');
@@ -12,6 +12,6 @@ export default withPageConfig({
   },
   publicDir: resolve(rootDir, 'public'),
   build: {
-    outDir: resolve(rootDir, '..', '..', 'dist', 'devtools-panel'),
+    outDir: resolve(rootDir, '..', '..', 'dist', 'options'),
   },
 });
