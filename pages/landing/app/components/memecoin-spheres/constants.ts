@@ -1,4 +1,5 @@
-export const MEMECOIN_IMAGES: string[] = [
+// Memecoin images from CoinGecko
+export const MEMECOIN_IMAGES = [
   'https://assets.coingecko.com/coins/images/5/large/dogecoin.png',
   'https://assets.coingecko.com/coins/images/11939/large/shiba.png',
   'https://assets.coingecko.com/coins/images/16746/large/PNG_image.png',
@@ -23,4 +24,39 @@ export const MEMECOIN_IMAGES: string[] = [
   'https://assets.coingecko.com/coins/images/33093/large/snek.png',
   'https://assets.coingecko.com/coins/images/36077/large/Wen.png',
   'https://assets.coingecko.com/coins/images/35209/large/Smog_token_logo.png',
-];
+] as const;
+
+// Fallback palette colors
+export const PALETTE_COLORS = [
+  0x3b82f6, // blue
+  0x14b8a6, // teal
+  0xeab308, // yellow
+  0x22c55e, // green
+  0xef4444, // red
+] as const;
+
+// Physics constants
+export const PHYSICS = {
+  SPHERE_COUNT: 50,
+  SPHERE_SEGMENTS: 64,
+  CENTER_OFFSET: { x: 7, y: 0, z: 0 },
+  BASE_ATTRACTION: 0.0005,
+  FRICTION: 0.992,
+  MAX_SPEED: 0.15,
+  MAX_SPEED_EXPLODING: 0.5,
+  BOUNDARY_RADIUS: 15,
+  EXPLOSION_DECAY: 0.98,
+  ROTATION_DAMPING: 0.99,
+} as const;
+
+// Star field constants
+export const STARS = {
+  COUNT: 500,
+  SPREAD_X: 60,
+  SPREAD_Y: 40,
+  MIN_Z: -100,
+  MAX_Z: -30,
+  RECYCLE_Z: 20,
+  MIN_VELOCITY: 0.05,
+  MAX_VELOCITY: 0.15,
+} as const;

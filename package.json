@@ -85,10 +85,8 @@
     "vite-plugin-node-polyfills": "^0.23.0"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,json}": [
-      "prettier --write",
-      "eslint --fix"
-    ]
+    "*.{js,jsx,ts,tsx,json}": "prettier --write",
+    "*.{js,jsx,ts,tsx}": "eslint --fix"
   },
   "packageManager": "pnpm@10.11.0",
   "engines": {

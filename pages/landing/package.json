@@ -3,10 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "clean:node_modules": "pnpx rimraf node_modules",
+    "clean:turbo": "rimraf .turbo",
+    "clean": "pnpm clean:turbo && pnpm clean:node_modules",
     "build": "next build",
+    "dev": "next dev",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint .",
+    "lint:fix": "pnpm lint --fix",
+    "format": "prettier . --write --ignore-path ../../.prettierignore",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "next": "16.1.6",
@@ -21,8 +27,6 @@
     "@types/react-dom": "^19",
     "@types/three": "^0.182.0",
     "babel-plugin-react-compiler": "1.0.0",
-    "eslint": "^9",
-    "eslint-config-next": "16.1.6",
     "tailwindcss": "latest",
     "typescript": "^5"
   }
