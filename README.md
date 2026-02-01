@@ -39,3 +39,4 @@ Bringing fun back
 ## Acknowledgements and open-source
 
 - The boilerplate for this project has been forked from [Jonghakseo/chrome-extension-boilerplate-react-vite](https://github.com/Jonghakseo/chrome-extension-boilerplate-react-vite)
+- The `@frens/inline-anchors` package contains CSUI utilities adapted from [Plasmo](https://github.com/PlasmoHQ/plasmo)
