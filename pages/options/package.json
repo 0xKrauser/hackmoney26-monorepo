@@ -1,0 +1,38 @@
+{
+  "name": "@frens/options",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "sideEffects": true,
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "clean:node_modules": "pnpx rimraf node_modules",
+    "clean:turbo": "rimraf .turbo",
+    "clean": "pnpm clean:turbo && pnpm clean:node_modules",
+    "build": "vite build",
+    "dev": "vite build --mode development",
+    "lint": "eslint .",
+    "lint:fix": "pnpm lint --fix",
+    "format": "prettier . --write --ignore-path ../../.prettierignore",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@repo/shared": "workspace:*",
+    "@repo/storage": "workspace:*",
+    "@repo/ui": "workspace:*",
+    "@repo/i18n": "workspace:*"
+  },
+  "devDependencies": {
+    "@repo/tailwindcss-config": "workspace:*",
+    "@repo/tsconfig": "workspace:*",
+    "@repo/vite-config": "workspace:*"
+  },
+  "postcss": {
+    "plugins": {
+      "tailwindcss": {},
+      "autoprefixer": {}
+    }
+  }
+}
