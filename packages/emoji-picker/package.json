@@ -1,38 +1,39 @@
 {
-  "name": "@frens/inline-reactions",
-  "version": "0.0.1",
+  "name": "@repo/emoji-picker",
+  "version": "0.1.0",
+  "description": "Discord-style emoji picker component",
   "type": "module",
   "private": true,
-  "sideEffects": true,
+  "sideEffects": false,
   "files": [
     "dist/**"
   ],
+  "types": "index.mts",
+  "main": "dist/index.mjs",
   "scripts": {
     "clean:bundle": "rimraf dist",
     "clean:node_modules": "pnpx rimraf node_modules",
     "clean:turbo": "rimraf .turbo",
     "clean": "pnpm clean:bundle && pnpm clean:node_modules && pnpm clean:turbo",
-    "build": "tsx build.mts",
-    "dev": "tsx build.mts",
+    "ready": "tsc -b",
     "lint": "eslint .",
     "lint:fix": "pnpm lint --fix",
     "format": "prettier . --write --ignore-path ../../.prettierignore",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@radix-ui/react-avatar": "^1.1.11",
-    "@repo/emoji-picker": "workspace:*",
-    "@repo/env": "workspace:*",
-    "@repo/i18n": "workspace:*",
-    "@repo/inline-anchors": "workspace:*",
-    "@repo/shared": "workspace:*",
+    "@radix-ui/react-popover": "^1.1.4",
+    "@repo/storage": "workspace:*",
     "@repo/ui": "workspace:*",
-    "lucide-react": "^0.563.0"
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.3.0"
   },
   "devDependencies": {
-    "@repo/hmr": "workspace:*",
-    "@repo/tailwindcss-config": "workspace:*",
     "@repo/tsconfig": "workspace:*",
-    "@repo/vite-config": "workspace:*"
+    "@repo/tailwindcss-config": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
   }
 }

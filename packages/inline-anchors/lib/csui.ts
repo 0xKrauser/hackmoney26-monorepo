@@ -11,7 +11,16 @@ type ElementInsertOptions = {
 };
 
 const createShadowDOM = async <T>(Mount: CSUI<T>) => {
-  const shadowHost = document.createElement('plasmo-csui');
+  const shadowHost = document.createElement('frens-csui');
+  // Create stacking context so the entire shadow DOM paints above page content
+  shadowHost.style.position = 'relative';
+  shadowHost.style.zIndex = '2147483647';
+  // Take equal space in flex row (match X/Twitter action bar slot)
+  shadowHost.style.flex = '1 1 0%';
+  shadowHost.style.minWidth = '0';
+  shadowHost.style.display = 'flex';
+  shadowHost.style.alignItems = 'center';
+  shadowHost.style.justifyContent = 'start';
 
   const shadowRoot =
     typeof Mount.createShadowRoot === 'function'
@@ -20,7 +29,7 @@ const createShadowDOM = async <T>(Mount: CSUI<T>) => {
 
   const shadowContainer = document.createElement('div');
 
-  shadowContainer.id = 'plasmo-shadow-container';
+  shadowContainer.id = 'frens-shadow-container';
   shadowContainer.style.zIndex = '2147483647';
   shadowContainer.style.position = 'relative';
 
@@ -156,7 +165,6 @@ const createAnchorObserverInternal = <T>(Mount: CSUI<T>) => {
         }
       } else {
         anchor?.root?.unmount();
-        // Clean up the plasmo-csui element
         el.remove();
         mountState.hostSet.delete(el);
       }
