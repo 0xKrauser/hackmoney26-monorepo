@@ -369,6 +369,9 @@ importers:
       '@repo/i18n':
         specifier: workspace:*
         version: link:../../packages/i18n
+      '@repo/inline-anchors':
+        specifier: workspace:*
+        version: link:../../packages/inline-anchors
       '@repo/shared':
         specifier: workspace:*
         version: link:../../packages/shared

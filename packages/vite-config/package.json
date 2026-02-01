@@ -1,6 +1,6 @@
 {
   "name": "@repo/vite-config",
-  "version": "0.5.0",
+  "version": "0.0.1",
   "description": "chrome extension - vite base configuration",
   "type": "module",
   "private": true,

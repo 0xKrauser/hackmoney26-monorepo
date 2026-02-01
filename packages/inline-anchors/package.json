@@ -1,5 +1,5 @@
 {
-  "name": "@frens/inline-anchors",
+  "name": "@repo/inline-anchors",
   "version": "0.1.0",
   "description": "Inline anchor utilities for content script UI",
   "type": "module",
