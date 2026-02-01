@@ -4,11 +4,11 @@
 import { useEffect, useState } from 'react';
 import type { CSUIContainerProps } from '../types.js';
 
-export const OverlayCSUIContainer = (props: CSUIContainerProps) => {
+export const OverlayCSUIContainer = (props?: CSUIContainerProps) => {
   const [top, setTop] = useState(0);
   const [left, setLeft] = useState(0);
 
-  const { anchor, watchOverlayAnchor } = props;
+  const { anchor, watchOverlayAnchor } = props ?? {};
 
   useEffect(() => {
     // Handle overlay repositioning
@@ -48,29 +48,29 @@ export const OverlayCSUIContainer = (props: CSUIContainerProps) => {
 
   return (
     <div
-      id={props.id}
-      className="plasmo-csui-container"
+      id={props?.id}
+      className="anchors-csui-container"
       style={{
         display: 'flex',
         position: 'absolute',
         top,
         left,
       }}>
-      {props.children}
+      {props?.children}
     </div>
   );
 };
 
-export const InlineCSUIContainer = (props: CSUIContainerProps) => (
+export const InlineCSUIContainer = (props?: CSUIContainerProps) => (
   <div
-    id="plasmo-inline"
-    className="plasmo-csui-container"
+    id="anchors-inline"
+    className="anchors-csui-container"
     style={{
       display: 'flex',
       position: 'relative',
       top: 0,
       left: 0,
     }}>
-    {props.children}
+    {props?.children}
   </div>
 );

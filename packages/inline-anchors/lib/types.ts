@@ -24,6 +24,7 @@ type CSUIOverlayAnchor = {
   element: Element;
   root?: Root;
   type: 'overlay';
+  props?: Record<string, unknown>;
 };
 
 type CSUIInlineAnchor = {
@@ -31,6 +32,7 @@ type CSUIInlineAnchor = {
   type: 'inline';
   insertPosition?: InsertPosition;
   root?: Root;
+  props?: Record<string, unknown>;
 };
 
 export type CSUIAnchor = CSUIOverlayAnchor | CSUIInlineAnchor;

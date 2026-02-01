@@ -136,7 +136,7 @@ const createAnchorObserverInternal = <T>(Mount: CSUI<T>) => {
     return null;
   }
 
-  const mountAnchors = async (render: (anchor?: CSUIAnchor) => void) => {
+  const mountAnchors = async (render: (anchor: CSUIAnchor) => void) => {
     mountState.isMounting = true;
 
     const mountedInlineAnchorSet = new WeakSet();
@@ -249,7 +249,7 @@ const createAnchorObserverInternal = <T>(Mount: CSUI<T>) => {
     mountState.isMounting = false;
   };
 
-  const start = (render: (anchor?: CSUIAnchor) => void) => {
+  const start = (render: (anchor: CSUIAnchor) => void) => {
     mountState.observer = new MutationObserver(() => {
       if (mountState.isMounting) {
         mountState.isMutated = true;
@@ -281,7 +281,7 @@ const createAnchorObserverInternal = <T>(Mount: CSUI<T>) => {
 
 const createRenderInternal = <T>(
   Mount: CSUI<T>,
-  containers: [T, T],
+  containers: T[],
   mountState?: CSUIMountState,
   renderFx?: (anchor: CSUIAnchor, rootContainer: Element) => Promise<void>,
 ) => {

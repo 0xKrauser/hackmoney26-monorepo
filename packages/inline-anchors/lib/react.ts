@@ -4,12 +4,8 @@
 import { Fragment } from 'react';
 import type { FC, ReactNode } from 'react';
 
-interface RawImportModule {
-  Layout?: FC<{ children: ReactNode }>;
-  getGlobalProvider?: () => FC<{ children: ReactNode }>;
-}
-
-export const getLayout = (RawImport: RawImportModule): FC<{ children: ReactNode }> =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getLayout = (RawImport: any): FC<{ children: ReactNode }> =>
   typeof RawImport.Layout === 'function'
     ? RawImport.Layout
     : typeof RawImport.getGlobalProvider === 'function'
