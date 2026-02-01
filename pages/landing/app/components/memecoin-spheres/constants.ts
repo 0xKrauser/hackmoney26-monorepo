@@ -39,7 +39,7 @@ export const PALETTE_COLORS = [
 export const PHYSICS = {
   SPHERE_COUNT: 50,
   SPHERE_SEGMENTS: 64,
-  CENTER_OFFSET: { x: 7, y: 0, z: 0 },
+  CENTER_OFFSET: { x: 9, y: -0.5, z: 0 },
   BASE_ATTRACTION: 0.0005,
   FRICTION: 0.992,
   MAX_SPEED: 0.15,

@@ -1,50 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
 @import 'tailwindcss';
 
 :root {
-  --background: oklch(0 0 0);
-  --foreground: oklch(0.9328 0.0025 228.7857);
-  --card: oklch(0.2097 0.008 274.5332);
-  --card-foreground: oklch(0.8853 0 0);
-  --popover: oklch(0 0 0);
-  --popover-foreground: oklch(0.9328 0.0025 228.7857);
-  --primary: oklch(0.6692 0.1607 245.011);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.9622 0.0035 219.5331);
-  --secondary-foreground: oklch(0.1884 0.0128 248.5103);
-  --muted: oklch(0.209 0 0);
-  --muted-foreground: oklch(0.5637 0.0078 247.9662);
-  --accent: oklch(0.1928 0.0331 242.5459);
-  --accent-foreground: oklch(0.6692 0.1607 245.011);
-  --destructive: oklch(0.6188 0.2376 25.7658);
-  --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.2674 0.0047 248.0045);
-  --input: oklch(0.302 0.0288 244.8244);
-  --ring: oklch(0.6818 0.1584 243.354);
-  --radius: 1.3rem;
+  --background: #F0F0F0;
+  --background-end: #F9D684;
+  --foreground: #1a1a1a;
+  --foreground-muted: #666666;
+  --primary: #FF6B35;
+  --primary-foreground: #ffffff;
+  --accent: #F9D684;
+  --shimmer: rgba(255, 180, 100, 0.15);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
   --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-border: var(--border);
-  --font-sans: 'Montserrat', sans-serif;
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 body,
@@ -52,17 +33,48 @@ html {
   margin: 0;
   width: 100%;
   height: 100%;
-  font-family: 'Montserrat', sans-serif;
 }
 
 body {
-  background: radial-gradient(circle at 30% 50%, var(--card) 0%, var(--background) 70%);
+  background: linear-gradient(135deg, var(--background) 0%, var(--background) 75%, var(--background-end) 100%);
   color: var(--foreground);
+  min-height: 100vh;
+  position: relative;
 }
 
-#app {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  font-family: 'Montserrat', sans-serif;
+/* Subtle orange shimmer in top left */
+body::before {
+  content: '';
+  position: fixed;
+  top: -20%;
+  left: -10%;
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(ellipse at center, var(--shimmer) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Gradient text utility - orange to gold */
+.text-gradient {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Subtle pulse animation for tagline */
+@keyframes soft-pulse {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.tagline-pulse {
+  color: var(--foreground);
+  animation: soft-pulse 3s ease-in-out infinite;
 }
