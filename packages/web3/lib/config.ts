@@ -16,11 +16,11 @@ export const CONTRACTS = {
   /** Yellow Network Adjudicator (SimpleConsensus) */
   adjudicator: '0x7c7ccbc98469190849BCC6c926307794fDfB11F2' as const,
 
-  /** ReactionPool contract - TODO: Update after deployment */
-  reactionPool: '0x0000000000000000000000000000000000000000' as const,
+  /** ReactionPool contract */
+  reactionPool: '0xF16A94b6086b6d7948905f2B7244E96D0b8e3715' as const,
 
-  /** Test token for PoC (PremintERC20) - TODO: Update after deployment */
-  testToken: '0x0000000000000000000000000000000000000000' as const,
+  /** Test token (TestUSDC) */
+  testToken: '0x1b888D884b442936292118D29Ef0fcC701685DcD' as const,
 } as const;
 
 /**
