@@ -40,7 +40,7 @@ const main = async () => {
   const { publicClient, walletClient, account } = await getClients();
 
   // Configuration
-  const depositAmount = parseUSDC('100'); // 100 USDC
+  const depositAmount = parseUSDC('10'); // 10 USDC
   const token = CONTRACTS.testToken;
   const reactionPool = CONTRACTS.reactionPool;
 
