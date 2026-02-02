@@ -169,9 +169,11 @@ contract ReactionPool is IERC1271, Ownable {
         }
 
         // Verify user signed this approval
-        bytes32 approvalHash = keccak256(
-            abi.encode("APPROVE_STATE", channelId, stateHash)
-        );
+        bytes32 approvalHash;
+        bytes memory data = abi.encode("APPROVE_STATE", channelId, stateHash);
+        assembly {
+            approvalHash := keccak256(add(data, 32), mload(data))
+        }
         address signer = approvalHash.toEthSignedMessageHash().recover(userSignature);
 
         if (signer != info.user) {
@@ -202,9 +204,11 @@ contract ReactionPool is IERC1271, Ownable {
         }
 
         // Verify user signed this batch approval
-        bytes32 approvalHash = keccak256(
-            abi.encode("BATCH_APPROVE", channelId, stateHashes)
-        );
+        bytes32 approvalHash;
+        bytes memory data = abi.encode("BATCH_APPROVE", channelId, stateHashes);
+        assembly {
+            approvalHash := keccak256(add(data, 32), mload(data))
+        }
         address signer = approvalHash.toEthSignedMessageHash().recover(userSignature);
 
         if (signer != info.user) {
