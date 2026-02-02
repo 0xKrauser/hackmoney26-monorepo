@@ -21,6 +21,8 @@
   "dependencies": {
     "@repo/shared": "workspace:*",
     "@repo/storage": "workspace:*",
+    "@repo/web3": "workspace:*",
+    "@repo/yellow": "workspace:*",
     "@repo/i18n": "workspace:*",
     "@repo/ui": "workspace:*"
   },
