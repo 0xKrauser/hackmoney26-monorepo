@@ -1,7 +1,10 @@
 import { CONTRACTS } from '../config.js';
 import { createPublicClientInstance } from '../wallet.js';
 import { encodeFunctionData, parseAbi } from 'viem';
-import type { Account, Chain, PublicClient, Transport, WalletClient } from 'viem';
+import type { Account, Chain, Transport, WalletClient } from 'viem';
+
+/** Public client type inferred from factory function */
+type PublicClientType = ReturnType<typeof createPublicClientInstance>;
 
 /**
  * Custody contract ABI (relevant functions only)
@@ -85,7 +88,7 @@ export interface ResizeAllocation {
 export const getDeposit = async (
   token: `0x${string}`,
   account: `0x${string}`,
-  client?: PublicClient,
+  client?: PublicClientType,
 ): Promise<bigint> => {
   const publicClient = client ?? createPublicClientInstance();
 
@@ -264,7 +267,7 @@ export const closeChannel = async (
  * Get channel info from the contract
  * @param channelId - The channel ID
  */
-export const getChannel = async (channelId: `0x${string}`, client?: PublicClient): Promise<ChannelTuple | null> => {
+export const getChannel = async (channelId: `0x${string}`, client?: PublicClientType): Promise<ChannelTuple | null> => {
   const publicClient = client ?? createPublicClientInstance();
 
   try {
@@ -284,7 +287,7 @@ export const getChannel = async (channelId: `0x${string}`, client?: PublicClient
  * Calculate channel ID from channel parameters
  * @param channel - The channel configuration
  */
-export const getChannelId = async (channel: Channel, client?: PublicClient): Promise<`0x${string}`> => {
+export const getChannelId = async (channel: Channel, client?: PublicClientType): Promise<`0x${string}`> => {
   const publicClient = client ?? createPublicClientInstance();
 
   return publicClient.readContract({

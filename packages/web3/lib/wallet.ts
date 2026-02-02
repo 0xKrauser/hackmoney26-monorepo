@@ -1,7 +1,7 @@
 import { CHAIN, RPC_URL } from './config.js';
 import { createPublicClient, createWalletClient, custom, http } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
-import type { Account, Chain, PublicClient, Transport, WalletClient } from 'viem';
+import type { Account, Chain, Transport, WalletClient } from 'viem';
 
 /**
  * Wallet connection state
@@ -15,7 +15,7 @@ export interface WalletState {
 /**
  * Create a public client for reading blockchain state
  */
-export const createPublicClientInstance = (): PublicClient =>
+export const createPublicClientInstance = () =>
   createPublicClient({
     chain: CHAIN,
     transport: http(RPC_URL),

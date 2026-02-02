@@ -1,7 +1,10 @@
 import { CONTRACTS } from '../config.js';
 import { createPublicClientInstance } from '../wallet.js';
 import { parseAbi } from 'viem';
-import type { Account, Chain, PublicClient, Transport, WalletClient } from 'viem';
+import type { Account, Chain, Transport, WalletClient } from 'viem';
+
+/** Public client type inferred from factory function */
+type PublicClientType = ReturnType<typeof createPublicClientInstance>;
 
 /**
  * ReactionPool contract ABI
@@ -165,7 +168,7 @@ export const recordActivity = async (
 export const canClose = async (
   channelId: `0x${string}`,
   currentBalance: bigint,
-  client?: PublicClient,
+  client?: PublicClientType,
 ): Promise<{ allowed: boolean; reason: string }> => {
   const publicClient = client ?? createPublicClientInstance();
 
@@ -205,7 +208,7 @@ export const markClosed = async (
  */
 export const getChannelInfo = async (
   channelId: `0x${string}`,
-  client?: PublicClient,
+  client?: PublicClientType,
 ): Promise<ReactionPoolChannelInfo> => {
   const publicClient = client ?? createPublicClientInstance();
 
@@ -227,7 +230,7 @@ export const getChannelInfo = async (
  * Check if a state hash is approved
  * @param stateHash - The state hash to check
  */
-export const isStateApproved = async (stateHash: `0x${string}`, client?: PublicClient): Promise<boolean> => {
+export const isStateApproved = async (stateHash: `0x${string}`, client?: PublicClientType): Promise<boolean> => {
   const publicClient = client ?? createPublicClientInstance();
 
   return publicClient.readContract({
@@ -246,7 +249,7 @@ export const isStateApproved = async (stateHash: `0x${string}`, client?: PublicC
 export const isValidSignature = async (
   hash: `0x${string}`,
   signature: `0x${string}`,
-  client?: PublicClient,
+  client?: PublicClientType,
 ): Promise<boolean> => {
   const publicClient = client ?? createPublicClientInstance();
 
@@ -265,7 +268,7 @@ export const isValidSignature = async (
  * Get contract constants
  */
 export const getContractConstants = async (
-  client?: PublicClient,
+  client?: PublicClientType,
 ): Promise<{
   magicValue: `0x${string}`;
   minCloseBalance: bigint;
