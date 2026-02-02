@@ -1,0 +1,17 @@
+{
+  "name": "@poc/scripts",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "1-deploy": "tsx 1-deploy.ts",
+    "2-setup": "tsx 2-setup-channel.ts",
+    "3-reaction": "tsx 3-send-reaction.ts",
+    "4-withdraw": "tsx 4-partial-withdraw.ts",
+    "5-close": "tsx 5-close-channel.ts"
+  },
+  "dependencies": {
+    "tsx": "^4.7.0",
+    "viem": "^2.21.0"
+  }
+}
