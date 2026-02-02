@@ -4,6 +4,7 @@ pragma solidity ^0.8.19;
 import {Script, console} from "forge-std/Script.sol";
 import {ReactionPool} from "../src/ReactionPool.sol";
 import {TestUSDC} from "../src/TestUSDC.sol";
+import {MockCustody} from "../src/MockCustody.sol";
 
 /**
  * @title Deploy
@@ -83,5 +84,67 @@ contract SetupPoolScript is Script {
         vm.stopBroadcast();
 
         console.log("Authorized signer set successfully");
+    }
+}
+
+/**
+ * @title DeployMock
+ * @notice Deploy MockCustody + TestUSDC + ReactionPool for LOCAL TESTING ONLY
+ *
+ * ⚠️  WARNING: This deploys a MOCK Custody contract that accepts any ERC20 token.
+ *     Use this ONLY when Yellow Network's testnet tokens (ytest.USD) are unavailable.
+ *     For production or integration testing with Yellow Network, use DeployScript instead.
+ *
+ * Usage:
+ *   forge script script/Deploy.s.sol:DeployMockScript --rpc-url base_sepolia --broadcast
+ */
+contract DeployMockScript is Script {
+    function setUp() public {}
+
+    function run() public {
+        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        address deployer = vm.addr(deployerPrivateKey);
+
+        console.log("===========================================");
+        console.log("  MOCK DEPLOYMENT - FOR TESTING ONLY");
+        console.log("===========================================\n");
+        console.log("Deployer address:", deployer);
+        console.log("Deployer balance:", deployer.balance);
+
+        vm.startBroadcast(deployerPrivateKey);
+
+        // 1. Deploy MockCustody (accepts any ERC20)
+        MockCustody custody = new MockCustody();
+        console.log("\n1. MockCustody deployed at:", address(custody));
+
+        // 2. Deploy TestUSDC token
+        TestUSDC token = new TestUSDC();
+        console.log("2. TestUSDC deployed at:", address(token));
+
+        // 3. Deploy ReactionPool pointing to MockCustody
+        ReactionPool pool = new ReactionPool(address(custody));
+        console.log("3. ReactionPool deployed at:", address(pool));
+
+        vm.stopBroadcast();
+
+        // Log deployment info
+        console.log("\n=== MOCK Deployment Summary ===");
+        console.log("MockCustody:", address(custody));
+        console.log("  [!] This is a MOCK - not Yellow Network's official Custody");
+        console.log("TestUSDC:", address(token));
+        console.log("  - Decimals:", token.decimals());
+        console.log("  - Deployer balance:", token.balanceOf(deployer));
+        console.log("ReactionPool:", address(pool));
+        console.log("  - Owner:", pool.owner());
+        console.log("  - Custody:", pool.custodyAddress());
+        console.log("===============================\n");
+
+        console.log("Next steps:");
+        console.log("1. Update CONTRACTS in packages/web3/lib/config.ts:");
+        console.log("   custody: '%s'", address(custody));
+        console.log("   testToken: '%s'", address(token));
+        console.log("   reactionPool: '%s'", address(pool));
+        console.log("2. Update CONTRACTS in poc/scripts/client.ts with same values");
+        console.log("3. Run: npx tsx scripts/2-setup-channel.ts");
     }
 }

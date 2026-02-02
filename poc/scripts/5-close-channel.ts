@@ -18,10 +18,10 @@
 import { getClients, CONTRACTS, formatUSDC, formatAddress } from './client';
 import { parseAbi } from 'viem';
 
-// Custody ABI
+// Custody ABI (compatible with MockCustody for testing)
 const CUSTODY_ABI = parseAbi([
-  'function closeChannel(bytes32 channelId, (address,address,address,uint256,uint256,bytes32,uint64) channel, bytes[] signatures) external',
-  'function getChannel(bytes32 channelId) external view returns ((address,address,address,uint256,uint256,bytes32,uint64))',
+  'function closeChannel(bytes32 channelId, (address,address,address,uint256,uint256,address,uint256) channel, bytes[] signatures) external',
+  'function getChannel(bytes32 channelId) external view returns ((address,address,address,uint256,uint256,address,uint256))',
   'function withdrawal(address token, uint256 amount) external',
   'function getDeposit(address token, address account) external view returns (uint256)',
 ]);

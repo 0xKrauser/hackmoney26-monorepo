@@ -26,12 +26,13 @@ const ERC20_ABI = parseAbi([
   'function allowance(address owner, address spender) external view returns (uint256)',
 ]);
 
-// Custody ABI
+// Custody ABI (compatible with MockCustody for testing)
+// NOTE: When using Yellow's official Custody, the tuple types may differ
 const CUSTODY_ABI = parseAbi([
   'function deposit(address token, uint256 amount) external',
   'function getDeposit(address token, address account) external view returns (uint256)',
-  'function createChannel(bytes32 channelId, (address,address,address,uint256,uint256,bytes32,uint64) channel) external',
-  'function getChannelId((address,address,address,uint256,uint256,bytes32,uint64) channel) external pure returns (bytes32)',
+  'function createChannel(bytes32 channelId, (address,address,address,uint256,uint256,address,uint256) channel) external',
+  'function getChannelId((address,address,address,uint256,uint256,address,uint256) channel) external pure returns (bytes32)',
 ]);
 
 const main = async () => {

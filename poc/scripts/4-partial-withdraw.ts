@@ -18,10 +18,10 @@
 import { getClients, CONTRACTS, formatUSDC, parseUSDC } from './client';
 import { parseAbi } from 'viem';
 
-// Custody ABI for resize
+// Custody ABI for resize (compatible with MockCustody for testing)
 const CUSTODY_ABI = parseAbi([
-  'function resizeChannel(bytes32 channelId, (address,address,address,uint256,uint256,bytes32,uint64) channel, (uint8,(address,uint256)[]) resize) external',
-  'function getChannel(bytes32 channelId) external view returns ((address,address,address,uint256,uint256,bytes32,uint64))',
+  'function resizeChannel(bytes32 channelId, (address,address,address,uint256,uint256,address,uint256) channel, (uint8,(address,uint256)[]) resize) external',
+  'function getChannel(bytes32 channelId) external view returns ((address,address,address,uint256,uint256,address,uint256))',
   'function withdrawal(address token, uint256 amount) external',
   'function getDeposit(address token, address account) external view returns (uint256)',
 ]);
