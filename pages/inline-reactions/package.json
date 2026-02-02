@@ -26,7 +26,9 @@
     "@repo/i18n": "workspace:*",
     "@repo/inline-anchors": "workspace:*",
     "@repo/shared": "workspace:*",
+    "@repo/storage": "workspace:*",
     "@repo/ui": "workspace:*",
+    "@repo/web3": "workspace:*",
     "lucide-react": "^0.563.0"
   },
   "devDependencies": {
