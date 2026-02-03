@@ -26,3 +26,8 @@ tsconfig.tsbuildinfo
 
 # compiled
 **/tailwind-output.css
+
+# foundry
+packages/contracts/out
+packages/contracts/cache
+packages/contracts/lib

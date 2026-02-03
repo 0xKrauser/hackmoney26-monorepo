@@ -32,6 +32,7 @@ export default config(
       '**/dist/**',
       '**/node_modules/**',
       'chrome-extension/manifest.js',
+      'packages/contracts/functions/**',
       // Next.js specific ignores for landing page
       'pages/landing/.next/**',
       'pages/landing/out/**',

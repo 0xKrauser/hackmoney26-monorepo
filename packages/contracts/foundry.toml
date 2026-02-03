@@ -1,0 +1,12 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+solc = "0.8.19"
+remappings = [
+    "@chainlink/contracts/=lib/chainlink-brownie-contracts/contracts/"
+]
+fs_permissions = [{ access = "read", path = "functions/" }]
+
+[rpc_endpoints]
+base_sepolia = "${BASE_SEPOLIA_RPC_URL}"

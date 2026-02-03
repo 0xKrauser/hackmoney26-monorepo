@@ -8,5 +8,5 @@
     },
     "types": ["chrome", "node"]
   },
-  "include": ["src", "vite.config.mts", "tailwind.config.ts"]
+  "include": ["src", "vite.config.mts"]
 }
