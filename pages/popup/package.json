@@ -19,6 +19,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@flaunch/sdk": "^0.9.16",
     "@privy-io/react-auth": "^2.12.3",
     "@repo/env": "workspace:*",
     "@repo/shared": "workspace:*",
