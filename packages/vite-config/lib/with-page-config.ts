@@ -23,6 +23,9 @@ export const withPageConfig = (config: UserConfig) =>
         },
         base: '',
         plugins: [react(), IS_DEV && watchRebuildPlugin({ refresh: true }), nodePolyfills()],
+        resolve: {
+          dedupe: ['react', 'react-dom'],
+        },
         build: {
           sourcemap: IS_DEV,
           minify: IS_PROD,

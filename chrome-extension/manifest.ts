@@ -30,11 +30,11 @@ const manifest = {
   },
   version: packageJson.version,
   description: '__MSG_extensionDescription__',
-  host_permissions: ['<all_urls>'],
-  permissions: ['storage', 'scripting', 'tabs', 'notifications', 'sidePanel'],
+  host_permissions: ['<all_urls>', 'https://auth.privy.io/*'],
+  permissions: ['storage', 'scripting', 'tabs', 'notifications', 'sidePanel', 'identity'],
   content_security_policy: {
     extension_pages:
-      "script-src 'self' 'wasm-unsafe-eval'; connect-src 'self' https: wss: ws:; frame-src 'self' https://*.walletconnect.com https://*.walletconnect.org; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;",
+      "script-src 'self' 'wasm-unsafe-eval'; connect-src 'self' https: wss: ws:; frame-src 'self' https://*.privy.io https://*.walletconnect.com https://*.walletconnect.org; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;",
   },
   options_page: 'options/index.html',
   background: {

@@ -31,3 +31,5 @@ tsconfig.tsbuildinfo
 packages/contracts/out
 packages/contracts/cache
 packages/contracts/lib
+
+CLAUDE.md

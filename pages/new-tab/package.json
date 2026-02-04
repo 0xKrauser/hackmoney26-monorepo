@@ -20,10 +20,16 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@flaunch/sdk": "^0.9.16",
+    "@privy-io/react-auth": "^2.12.3",
+    "@repo/env": "workspace:*",
     "@repo/i18n": "workspace:*",
     "@repo/shared": "workspace:*",
     "@repo/storage": "workspace:*",
     "@repo/ui": "workspace:*",
+    "@tanstack/react-query": "^5.60.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "viem": "^2.21.0"
   },
   "devDependencies": {
