@@ -35,19 +35,52 @@ const storage = createStorage<FavoritesState>(
 
 const DEFAULT_AMOUNT = 100; // Default coins per reaction
 
+// Helper to ensure state has the correct structure (handles migration from old format)
+const normalizeState = (state: FavoritesState | { favorites?: FavoriteMemecoin[] }): FavoritesState => {
+  // Check if this is old format (has favorites array instead of favoritesByChain)
+  const oldState = state as { favorites?: FavoriteMemecoin[] };
+  if (oldState.favorites && !('favoritesByChain' in state)) {
+    // Migrate old favorites to base-sepolia (since that was the only chain before)
+    return {
+      favoritesByChain: {
+        base: [],
+        'base-sepolia': oldState.favorites.map(f => ({
+          ...f,
+          amount: f.amount ?? DEFAULT_AMOUNT,
+        })),
+      },
+      currentChain: 'base-sepolia',
+    };
+  }
+
+  // Ensure favoritesByChain exists and has both chains
+  const newState = state as FavoritesState;
+  return {
+    favoritesByChain: {
+      base: newState.favoritesByChain?.base || [],
+      'base-sepolia': newState.favoritesByChain?.['base-sepolia'] || [],
+    },
+    currentChain: newState.currentChain || 'base-sepolia',
+  };
+};
+
 const favoritesStorage = {
   ...storage,
 
   setCurrentChain: async (chain: SupportedChain) => {
-    await storage.set(current => ({
-      ...current,
-      currentChain: chain,
-    }));
+    await storage.set(current => {
+      const normalized = normalizeState(current);
+      return {
+        ...normalized,
+        currentChain: chain,
+      };
+    });
   },
 
   getCurrentChain: async (): Promise<SupportedChain> => {
     const state = await storage.get();
-    return state.currentChain;
+    const normalized = normalizeState(state);
+    return normalized.currentChain;
   },
 
   addFavorite: async (
@@ -55,18 +88,19 @@ const favoritesStorage = {
     chain?: SupportedChain,
   ) => {
     await storage.set(current => {
-      const targetChain = chain ?? current.currentChain;
-      const chainFavorites = current.favoritesByChain[targetChain] || [];
+      const normalized = normalizeState(current);
+      const targetChain = chain ?? normalized.currentChain;
+      const chainFavorites = normalized.favoritesByChain[targetChain] || [];
 
       // Don't add duplicates
       if (chainFavorites.some(f => f.address.toLowerCase() === coin.address.toLowerCase())) {
-        return current;
+        return normalized;
       }
 
       return {
-        ...current,
+        ...normalized,
         favoritesByChain: {
-          ...current.favoritesByChain,
+          ...normalized.favoritesByChain,
           [targetChain]: [
             {
               ...coin,
@@ -82,13 +116,14 @@ const favoritesStorage = {
 
   updateAmount: async (address: string, amount: number, chain?: SupportedChain) => {
     await storage.set(current => {
-      const targetChain = chain ?? current.currentChain;
-      const chainFavorites = current.favoritesByChain[targetChain] || [];
+      const normalized = normalizeState(current);
+      const targetChain = chain ?? normalized.currentChain;
+      const chainFavorites = normalized.favoritesByChain[targetChain] || [];
 
       return {
-        ...current,
+        ...normalized,
         favoritesByChain: {
-          ...current.favoritesByChain,
+          ...normalized.favoritesByChain,
           [targetChain]: chainFavorites.map(f =>
             f.address.toLowerCase() === address.toLowerCase() ? { ...f, amount } : f,
           ),
@@ -99,13 +134,14 @@ const favoritesStorage = {
 
   removeFavorite: async (address: string, chain?: SupportedChain) => {
     await storage.set(current => {
-      const targetChain = chain ?? current.currentChain;
-      const chainFavorites = current.favoritesByChain[targetChain] || [];
+      const normalized = normalizeState(current);
+      const targetChain = chain ?? normalized.currentChain;
+      const chainFavorites = normalized.favoritesByChain[targetChain] || [];
 
       return {
-        ...current,
+        ...normalized,
         favoritesByChain: {
-          ...current.favoritesByChain,
+          ...normalized.favoritesByChain,
           [targetChain]: chainFavorites.filter(f => f.address.toLowerCase() !== address.toLowerCase()),
         },
       };
@@ -114,24 +150,27 @@ const favoritesStorage = {
 
   isFavorite: async (address: string, chain?: SupportedChain): Promise<boolean> => {
     const state = await storage.get();
-    const targetChain = chain ?? state.currentChain;
-    const chainFavorites = state.favoritesByChain[targetChain] || [];
+    const normalized = normalizeState(state);
+    const targetChain = chain ?? normalized.currentChain;
+    const chainFavorites = normalized.favoritesByChain[targetChain] || [];
     return chainFavorites.some(f => f.address.toLowerCase() === address.toLowerCase());
   },
 
   getFavorites: async (chain?: SupportedChain): Promise<FavoriteMemecoin[]> => {
     const state = await storage.get();
-    const targetChain = chain ?? state.currentChain;
-    return state.favoritesByChain[targetChain] || [];
+    const normalized = normalizeState(state);
+    const targetChain = chain ?? normalized.currentChain;
+    return normalized.favoritesByChain[targetChain] || [];
   },
 
   clearFavorites: async (chain?: SupportedChain) => {
     await storage.set(current => {
-      const targetChain = chain ?? current.currentChain;
+      const normalized = normalizeState(current);
+      const targetChain = chain ?? normalized.currentChain;
       return {
-        ...current,
+        ...normalized,
         favoritesByChain: {
-          ...current.favoritesByChain,
+          ...normalized.favoritesByChain,
           [targetChain]: [],
         },
       };

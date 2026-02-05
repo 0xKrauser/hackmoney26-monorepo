@@ -35,21 +35,20 @@ const formatMarketCap = (value: string) => {
   return `${ethValue.toFixed(6)} ETH`;
 };
 
-type ViewMode = 'favorites' | 'search' | 'add-address';
+type ViewMode = 'favorites' | 'trending' | 'add-address';
 
 const FavoriteMemecoins = () => {
   const { config: chainConfig, chain } = useChain();
   const [favorites, setFavorites] = useState<FavoriteMemecoin[]>([]);
-  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [trendingCoins, setTrendingCoins] = useState<SearchResult[]>([]);
   const [addressInput, setAddressInput] = useState('');
   const [viewMode, setViewMode] = useState<ViewMode>('favorites');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  // Clear search results and sync chain when chain changes
+  // Clear trending coins and sync chain when chain changes
   useEffect(() => {
-    setSearchResults([]);
+    setTrendingCoins([]);
     setError('');
     // Sync current chain to favorites storage
     favoritesStorage.setCurrentChain(chain as SupportedChain);
@@ -73,54 +72,14 @@ const FavoriteMemecoins = () => {
     };
   }, [chain]);
 
-  // Search memecoins (filter from all tokens since API doesn't have search endpoint)
-  const handleSearch = useCallback(async () => {
-    if (!searchQuery.trim()) return;
-
-    setLoading(true);
-    setError('');
-
-    try {
-      const response = await fetch(`${chainConfig.flaunchApi}/tokens?limit=100`);
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch tokens');
-      }
-
-      const data = await response.json();
-      const tokens: TokenResponse[] = data?.data || [];
-
-      // Filter by search query (name or symbol)
-      const query = searchQuery.toLowerCase();
-      const filtered = tokens.filter(
-        t => t.name.toLowerCase().includes(query) || t.symbol.toLowerCase().includes(query),
-      );
-
-      const results: SearchResult[] = filtered.map(t => ({
-        id: t.tokenAddress,
-        name: t.name,
-        symbol: t.symbol,
-        imageUrl: t.image || '',
-        marketCapETH: t.marketCapETH,
-      }));
-
-      setSearchResults(results);
-    } catch (e) {
-      setError((e as Error).message || 'Search failed');
-      setSearchResults([]);
-    } finally {
-      setLoading(false);
-    }
-  }, [searchQuery, chainConfig.flaunchApi]);
-
-  // Fetch top coins by market cap
-  const fetchTopCoins = useCallback(async () => {
+  // Fetch trending coins by market cap
+  const fetchTrendingCoins = useCallback(async () => {
     setLoading(true);
     setError('');
 
     try {
       // API returns tokens sorted by market cap (highest first) by default
-      const response = await fetch(`${chainConfig.flaunchApi}/tokens?limit=20`);
+      const response = await fetch(`${chainConfig.flaunchApi}/tokens?limit=10`);
 
       if (!response.ok) {
         throw new Error('Failed to load coins');
@@ -141,10 +100,10 @@ const FavoriteMemecoins = () => {
         marketCapETH: t.marketCapETH,
       }));
 
-      setSearchResults(results);
+      setTrendingCoins(results);
     } catch (e) {
       setError((e as Error).message || 'Failed to load coins');
-      setSearchResults([]);
+      setTrendingCoins([]);
     } finally {
       setLoading(false);
     }
@@ -242,11 +201,11 @@ const FavoriteMemecoins = () => {
             className="favorites-action-btn"
             onClick={() => {
               setError('');
-              setViewMode('search');
-              fetchTopCoins();
+              setViewMode('trending');
+              fetchTrendingCoins();
             }}
-            title="Browse coins">
-            <SearchIcon />
+            title="Browse trending coins">
+            <TrendingIcon />
           </button>
           <button
             type="button"
@@ -310,46 +269,28 @@ const FavoriteMemecoins = () => {
     </>
   );
 
-  // Render search view
-  const renderSearch = () => (
+  // Render trending view
+  const renderTrending = () => (
     <>
       <div className="favorites-header">
         <button type="button" className="favorites-back-btn" onClick={() => setViewMode('favorites')}>
           <BackIcon />
         </button>
-        <h4 className="favorites-title">Browse Coins</h4>
+        <h4 className="favorites-title">Trending Coins</h4>
         <div style={{ width: 24 }} />
-      </div>
-
-      <div className="favorites-search-row">
-        <input
-          type="text"
-          className="favorites-search-input"
-          placeholder="Search by name or symbol..."
-          value={searchQuery}
-          onChange={e => setSearchQuery(e.target.value)}
-          onKeyDown={e => e.key === 'Enter' && handleSearch()}
-        />
-        <button
-          type="button"
-          className="favorites-search-btn"
-          onClick={handleSearch}
-          disabled={loading || !searchQuery.trim()}>
-          {loading ? <SpinnerIcon /> : <SearchIcon />}
-        </button>
       </div>
 
       {error && <div className="favorites-error">{error}</div>}
 
-      {loading && searchResults.length === 0 && (
+      {loading && trendingCoins.length === 0 && (
         <div className="favorites-loading">
           <SpinnerIcon />
-          <span>Loading coins...</span>
+          <span>Loading trending coins...</span>
         </div>
       )}
 
       <div className="favorites-results">
-        {searchResults.map(coin => (
+        {trendingCoins.map(coin => (
           <div key={coin.id} className="favorites-item">
             <div className="favorites-item-image">
               {coin.imageUrl ? (
@@ -420,7 +361,7 @@ const FavoriteMemecoins = () => {
   return (
     <div className="favorites-container">
       {viewMode === 'favorites' && renderFavorites()}
-      {viewMode === 'search' && renderSearch()}
+      {viewMode === 'trending' && renderTrending()}
       {viewMode === 'add-address' && renderAddByAddress()}
     </div>
   );
@@ -442,7 +383,7 @@ const StarIcon = ({ filled = false }: { filled?: boolean }) => (
   </svg>
 );
 
-const SearchIcon = () => (
+const TrendingIcon = () => (
   <svg
     width="14"
     height="14"
@@ -453,8 +394,8 @@ const SearchIcon = () => (
     strokeLinecap="round"
     strokeLinejoin="round"
     aria-hidden="true">
-    <circle cx="11" cy="11" r="8" />
-    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+    <polyline points="17 6 23 6 23 12" />
   </svg>
 );
 

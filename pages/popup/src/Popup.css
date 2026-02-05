@@ -519,6 +519,34 @@ body {
   min-height: 200px;
 }
 
+.memecoins-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.memecoins-header .wallet-section-title {
+  margin: 0;
+  padding: 0;
+}
+
+.memecoins-flaunch-link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: rgba(226, 228, 235, 0.4);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.memecoins-flaunch-link:hover {
+  color: rgba(226, 228, 235, 0.7);
+}
+
 .memecoins-tabs {
   display: flex;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
