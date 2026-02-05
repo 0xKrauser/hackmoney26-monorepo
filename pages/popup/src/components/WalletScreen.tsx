@@ -1,22 +1,17 @@
-import ChainSelector from './ChainSelector';
-import FavoriteMemecoins from './FavoriteMemecoins';
+import MainWallet from './MainWallet';
 import SwapScreen from './SwapScreen';
 import TwitterVerification from './TwitterVerification';
-import { useChain } from '../hooks/useChain';
 import { useToast } from '../providers/ToastProvider';
-import { usePrivy, useWallets } from '@privy-io/react-auth';
-import { useState, useCallback, useEffect } from 'react';
+import { useWallets } from '@privy-io/react-auth';
+import { useState, useEffect } from 'react';
 import type { Address } from 'viem';
 
 type ActiveView = 'main' | 'twitter-verify' | 'swap';
 
 const WalletScreen = () => {
-  const { user, logout } = usePrivy();
   const { wallets } = useWallets();
-  const { showSuccess, showError } = useToast();
-  const { config: chainConfig } = useChain();
+  const { showSuccess } = useToast();
   const [activeView, setActiveView] = useState<ActiveView>('main');
-  const [copied, setCopied] = useState(false);
   const [isTwitterVerified, setIsTwitterVerified] = useState(false);
 
   // Get the embedded wallet address
@@ -39,33 +34,6 @@ const WalletScreen = () => {
     checkTwitterVerification();
   }, [walletAddress]);
 
-  const handleCopyAddress = useCallback(async () => {
-    if (!walletAddress) return;
-    try {
-      await navigator.clipboard.writeText(walletAddress);
-      setCopied(true);
-      showSuccess('Address copied!');
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      showError('Failed to copy');
-    }
-  }, [walletAddress, showSuccess, showError]);
-
-  const handleLogout = useCallback(async () => {
-    try {
-      await logout();
-    } catch {
-      showError('Failed to logout');
-    }
-  }, [logout, showError]);
-
-  const handleComingSoon = useCallback(
-    (feature: string) => {
-      showError(`${feature} coming soon!`);
-    },
-    [showError],
-  );
-
   // Render different views
   if (activeView === 'swap') {
     return <SwapScreen onBack={() => setActiveView('main')} />;
@@ -85,249 +53,7 @@ const WalletScreen = () => {
     );
   }
 
-  return (
-    <div className="wallet-screen">
-      {/* Header with user info */}
-      <div className="wallet-header">
-        <div className="wallet-header-left">
-          <div className="wallet-avatar">{walletAddress?.slice(2, 4).toUpperCase() || 'FR'}</div>
-          <div className="wallet-user-info">
-            <span className="wallet-email">
-              {user?.email?.address ||
-                (walletAddress ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}` : 'Wallet')}
-            </span>
-            {isTwitterVerified && (
-              <span className="wallet-twitter-badge">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
-                Verified
-              </span>
-            )}
-          </div>
-        </div>
-        <div className="wallet-header-right">
-          <ChainSelector />
-          <button type="button" className="wallet-logout-btn" onClick={handleLogout} title="Logout">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true">
-              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-              <polyline points="16 17 21 12 16 7" />
-              <line x1="21" y1="12" x2="9" y2="12" />
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      {/* Wallet Address Card */}
-      <div className="wallet-address-card">
-        <div className="wallet-address-label">Wallet Address</div>
-        <div className="wallet-address-row">
-          <span className="wallet-address-value">
-            {walletAddress ? `${walletAddress.slice(0, 8)}...${walletAddress.slice(-6)}` : 'Loading...'}
-          </span>
-          <button type="button" className="wallet-copy-btn" onClick={handleCopyAddress} disabled={!walletAddress}>
-            {copied ? (
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-            ) : (
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-              </svg>
-            )}
-          </button>
-        </div>
-        {walletAddress && (
-          <a
-            href={`${chainConfig.explorerUrl}/address/${walletAddress}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="wallet-explorer-link">
-            View on {chainConfig.name === 'Base' ? 'BaseScan' : 'Sepolia BaseScan'}
-            <svg
-              width="10"
-              height="10"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-              <polyline points="15 3 21 3 21 9" />
-              <line x1="10" y1="14" x2="21" y2="3" />
-            </svg>
-          </a>
-        )}
-      </div>
-
-      {/* Twitter Verification Card */}
-      <div className="wallet-twitter-card">
-        <div className="wallet-twitter-info">
-          <div className="wallet-twitter-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-            </svg>
-          </div>
-          <div className="wallet-twitter-text">
-            <span className="wallet-twitter-title">Twitter</span>
-            <span className="wallet-twitter-status">{isTwitterVerified ? 'Verified' : 'Not verified'}</span>
-          </div>
-        </div>
-        {isTwitterVerified ? (
-          <div className="wallet-verified-badge">
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-          </div>
-        ) : (
-          <button type="button" className="wallet-verify-btn" onClick={() => setActiveView('twitter-verify')}>
-            Verify
-          </button>
-        )}
-      </div>
-
-      {/* Action Buttons Grid */}
-      <div className="wallet-actions-section">
-        <h3 className="wallet-section-title">Actions</h3>
-        <div className="wallet-actions-grid">
-          <ActionButton icon={<SwapIcon />} label="Swap" onClick={() => setActiveView('swap')} />
-          <ActionButton icon={<TransferIcon />} label="Send" onClick={() => handleComingSoon('Send')} />
-          <ActionButton icon={<DepositIcon />} label="Deposit" onClick={() => handleComingSoon('Deposit')} />
-        </div>
-      </div>
-
-      {/* Memecoins Section */}
-      <div className="wallet-memecoins-section">
-        <div className="memecoins-header">
-          <h3 className="wallet-section-title">Reaction Coins</h3>
-          <a href="https://flaunch.gg" target="_blank" rel="noopener noreferrer" className="memecoins-flaunch-link">
-            Memecoins from flaunch.gg
-            <svg
-              width="10"
-              height="10"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-              <polyline points="15 3 21 3 21 9" />
-              <line x1="10" y1="14" x2="21" y2="3" />
-            </svg>
-          </a>
-        </div>
-        <FavoriteMemecoins />
-      </div>
-    </div>
-  );
+  return <MainWallet onNavigate={setActiveView} isTwitterVerified={isTwitterVerified} />;
 };
-
-// Action Button Component
-interface ActionButtonProps {
-  icon: React.ReactNode;
-  label: string;
-  onClick: () => void;
-  accent?: boolean;
-}
-
-const ActionButton = ({ icon, label, onClick, accent }: ActionButtonProps) => (
-  <button type="button" className={`wallet-action-btn ${accent ? 'wallet-action-btn-accent' : ''}`} onClick={onClick}>
-    <div className="wallet-action-icon">{icon}</div>
-    <span className="wallet-action-label">{label}</span>
-  </button>
-);
-
-// Icons
-const SwapIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true">
-    <path d="M16 3l4 4-4 4" />
-    <path d="M20 7H4" />
-    <path d="M8 21l-4-4 4-4" />
-    <path d="M4 17h16" />
-  </svg>
-);
-
-const TransferIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true">
-    <line x1="12" y1="5" x2="12" y2="19" />
-    <polyline points="19 12 12 19 5 12" />
-  </svg>
-);
-
-const DepositIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true">
-    <path d="M12 2v15" />
-    <path d="M17 12l-5 5-5-5" />
-    <path d="M19 22H5" />
-  </svg>
-);
 
 export default WalletScreen;

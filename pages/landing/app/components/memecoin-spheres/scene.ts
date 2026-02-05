@@ -98,8 +98,8 @@ const createStarField = (scene: THREE.Scene): StarFieldData => {
   const velocities: { z: number }[] = [];
 
   const white = new THREE.Color(0xffffff);
-  const blue = new THREE.Color(0x3b82f6);
-  const teal = new THREE.Color(0x14b8a6);
+  const orange = new THREE.Color(0xff6b35);
+  const gold = new THREE.Color(0xf9d684);
 
   for (let i = 0; i < STARS.COUNT; i++) {
     const i3 = i * 3;
@@ -114,9 +114,9 @@ const createStarField = (scene: THREE.Scene): StarFieldData => {
       z: STARS.MIN_VELOCITY + Math.random() * (STARS.MAX_VELOCITY - STARS.MIN_VELOCITY),
     });
 
-    // Color: 80% white, 15% blue, 5% teal
+    // Color: 30% white, 45% gold, 25% orange
     const rand = Math.random();
-    const color = rand < 0.8 ? white : rand < 0.95 ? blue : teal;
+    const color = rand < 0.3 ? white : rand < 0.75 ? gold : orange;
     colors[i3] = color.r;
     colors[i3 + 1] = color.g;
     colors[i3 + 2] = color.b;
@@ -126,9 +126,9 @@ const createStarField = (scene: THREE.Scene): StarFieldData => {
   geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
   const material = new THREE.PointsMaterial({
-    size: 0.08,
+    size: 0.15,
     transparent: true,
-    opacity: 0.5,
+    opacity: 0.85,
     sizeAttenuation: true,
     blending: THREE.AdditiveBlending,
     depthWrite: false,

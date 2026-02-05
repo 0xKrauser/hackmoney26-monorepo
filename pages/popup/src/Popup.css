@@ -780,15 +780,19 @@ body {
 }
 
 .verify-btn-primary {
-  width: 100%;
-  max-width: 300px;
-  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  flex: none;
+  width: auto;
+  max-width: none;
+  background: #F97316;
   border-color: transparent;
+  padding: 8px 24px;
+  font-size: 12px;
+  border-radius: 8px;
 }
 
 .verify-btn-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #2563eb, #4f46e5);
-  box-shadow: 0 4px 16px -4px rgba(59, 130, 246, 0.4);
+  background: #EA580C;
+  box-shadow: 0 4px 12px -4px rgba(249, 115, 22, 0.4);
 }
 
 .verify-btn:disabled {
