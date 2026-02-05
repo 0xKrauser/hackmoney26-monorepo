@@ -203,7 +203,13 @@ const useLiFiSwap = () => {
   // Computed values
   const toAmount = quote ? (Number(quote.estimate.toAmount) / 10 ** toToken.decimals).toFixed(6) : '';
 
-  const rate = quote ? (Number(quote.estimate.toAmount) / Number(quote.action.fromAmount)).toFixed(6) : '';
+  const rate = quote
+    ? (
+        Number(quote.estimate.toAmount) /
+        10 ** toToken.decimals /
+        (Number(quote.action.fromAmount) / 10 ** fromToken.decimals)
+      ).toFixed(6)
+    : '';
 
   const gasCostUSD = quote?.estimate?.gasCosts?.[0]?.amountUSD || '0.00';
 
