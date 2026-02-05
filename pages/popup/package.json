@@ -20,11 +20,12 @@
   },
   "dependencies": {
     "@flaunch/sdk": "^0.9.16",
+    "@lifi/sdk": "^3.15.5",
     "@privy-io/react-auth": "^2.12.3",
     "@repo/env": "workspace:*",
+    "@repo/i18n": "workspace:*",
     "@repo/shared": "workspace:*",
     "@repo/storage": "workspace:*",
-    "@repo/i18n": "workspace:*",
     "@repo/ui": "workspace:*",
     "@tanstack/react-query": "^5.60.0",
     "react": "^19.1.0",

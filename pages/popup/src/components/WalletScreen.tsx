@@ -1,5 +1,6 @@
 import ChainSelector from './ChainSelector';
 import FavoriteMemecoins from './FavoriteMemecoins';
+import SwapScreen from './SwapScreen';
 import TwitterVerification from './TwitterVerification';
 import { useChain } from '../hooks/useChain';
 import { useToast } from '../providers/ToastProvider';
@@ -7,7 +8,7 @@ import { usePrivy, useWallets } from '@privy-io/react-auth';
 import { useState, useCallback, useEffect } from 'react';
 import type { Address } from 'viem';
 
-type ActiveView = 'main' | 'twitter-verify';
+type ActiveView = 'main' | 'twitter-verify' | 'swap';
 
 const WalletScreen = () => {
   const { user, logout } = usePrivy();
@@ -66,6 +67,10 @@ const WalletScreen = () => {
   );
 
   // Render different views
+  if (activeView === 'swap') {
+    return <SwapScreen onBack={() => setActiveView('main')} />;
+  }
+
   if (activeView === 'twitter-verify' && walletAddress) {
     return (
       <TwitterVerification
@@ -224,7 +229,7 @@ const WalletScreen = () => {
       <div className="wallet-actions-section">
         <h3 className="wallet-section-title">Actions</h3>
         <div className="wallet-actions-grid">
-          <ActionButton icon={<SwapIcon />} label="Swap" onClick={() => handleComingSoon('Swap')} />
+          <ActionButton icon={<SwapIcon />} label="Swap" onClick={() => setActiveView('swap')} />
           <ActionButton icon={<TransferIcon />} label="Send" onClick={() => handleComingSoon('Send')} />
           <ActionButton icon={<DepositIcon />} label="Deposit" onClick={() => handleComingSoon('Deposit')} />
         </div>

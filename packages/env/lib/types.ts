@@ -4,6 +4,7 @@ interface ICebEnv {
   readonly CEB_EXAMPLE: string;
   readonly CEB_DEV_LOCALE: string;
   readonly CEB_PRIVY_APP_ID: string;
+  readonly CEB_LIFI_API_KEY: string;
 }
 
 interface ICebCliEnv {
