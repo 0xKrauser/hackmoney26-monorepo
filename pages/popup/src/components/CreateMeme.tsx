@@ -1,4 +1,5 @@
 import { addStoredMeme } from './OwnedMemecoins';
+import { useChain } from '../hooks/useChain';
 import { useToast } from '../providers/ToastProvider';
 import { createFlaunch } from '@flaunch/sdk';
 import { useWallets } from '@privy-io/react-auth';
@@ -40,6 +41,7 @@ const CreateMeme = ({ walletAddress, onBack }: CreateMemeProps) => {
   const { wallets } = useWallets();
   const embeddedWallet = wallets.find(w => w.walletClientType === 'privy');
   const { showError, showSuccess } = useToast();
+  const { config: chainConfig } = useChain();
 
   const [formData, setFormData] = useState<MemeFormData>({
     name: '',
@@ -178,7 +180,7 @@ const CreateMeme = ({ walletAddress, onBack }: CreateMemeProps) => {
             <div className="create-meme-detail-row">
               <span className="create-meme-detail-label">Contract</span>
               <a
-                href={`https://sepolia.basescan.org/address/${success.memecoin}`}
+                href={`${chainConfig.explorerUrl}/address/${success.memecoin}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="create-meme-detail-link">
@@ -189,11 +191,11 @@ const CreateMeme = ({ walletAddress, onBack }: CreateMemeProps) => {
               <div className="create-meme-detail-row">
                 <span className="create-meme-detail-label">Tx</span>
                 <a
-                  href={`https://sepolia.basescan.org/tx/${txHash}`}
+                  href={`${chainConfig.explorerUrl}/tx/${txHash}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="create-meme-detail-link">
-                  View on BaseScan
+                  View on Explorer
                 </a>
               </div>
             )}

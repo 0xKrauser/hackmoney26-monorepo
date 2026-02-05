@@ -1,3 +1,4 @@
+import { useChain } from '../hooks/useChain';
 import { useToast } from '../providers/ToastProvider';
 import { useWallets } from '@privy-io/react-auth';
 import { BASE_SEPOLIA_RPC_URL, TWITTER_VERIFIER_ABI, TWITTER_VERIFIER_ADDRESS } from '@repo/shared';
@@ -22,6 +23,7 @@ const publicClient = createPublicClient({
 const TwitterVerification = ({ walletAddress, onBack, onVerified }: TwitterVerificationProps) => {
   const { wallets } = useWallets();
   const { showError } = useToast();
+  const { config: chainConfig } = useChain();
 
   // Get the Privy embedded wallet
   const embeddedWallet = wallets.find(w => w.walletClientType === 'privy');
@@ -252,7 +254,7 @@ const TwitterVerification = ({ walletAddress, onBack, onVerified }: TwitterVerif
             </p>
             {txHash && (
               <a
-                href={`https://sepolia.basescan.org/tx/${txHash}`}
+                href={`${chainConfig.explorerUrl}/tx/${txHash}`}
                 className="verify-link"
                 target="_blank"
                 rel="noopener noreferrer">

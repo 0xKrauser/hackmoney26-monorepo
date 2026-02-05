@@ -1,3 +1,4 @@
+import { useChain } from '../hooks/useChain';
 import { createFlaunch } from '@flaunch/sdk';
 import { useState, useEffect, useCallback } from 'react';
 import { createPublicClient, http } from 'viem';
@@ -54,6 +55,7 @@ const addStoredMeme = (walletAddress: Address, memeAddress: string, timestamp: n
 };
 
 const OwnedMemecoins = ({ walletAddress }: OwnedMemecoinsProps) => {
+  const { config: chainConfig } = useChain();
   const [memes, setMemes] = useState<MemeInfo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>('');
@@ -168,7 +170,7 @@ const OwnedMemecoins = ({ walletAddress }: OwnedMemecoinsProps) => {
       {memes.map(meme => (
         <a
           key={meme.address}
-          href={`https://sepolia.basescan.org/address/${meme.address}`}
+          href={`${chainConfig.explorerUrl}/address/${meme.address}`}
           target="_blank"
           rel="noopener noreferrer"
           className="memecoins-item">

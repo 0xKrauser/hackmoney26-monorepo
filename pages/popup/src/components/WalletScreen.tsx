@@ -1,20 +1,26 @@
+import ChainSelector from './ChainSelector';
 import CreateMeme from './CreateMeme';
+import FavoriteMemecoins from './FavoriteMemecoins';
 import OwnedMemecoins from './OwnedMemecoins';
 import TwitterVerification from './TwitterVerification';
+import { useChain } from '../hooks/useChain';
 import { useToast } from '../providers/ToastProvider';
 import { usePrivy, useWallets } from '@privy-io/react-auth';
 import { useState, useCallback, useEffect } from 'react';
 import type { Address } from 'viem';
 
 type ActiveView = 'main' | 'twitter-verify' | 'create-meme';
+type MemecoinTab = 'favorites' | 'created';
 
 const WalletScreen = () => {
   const { user, logout } = usePrivy();
   const { wallets } = useWallets();
   const { showSuccess, showError } = useToast();
+  const { config: chainConfig } = useChain();
   const [activeView, setActiveView] = useState<ActiveView>('main');
   const [copied, setCopied] = useState(false);
   const [isTwitterVerified, setIsTwitterVerified] = useState(false);
+  const [memecoinTab, setMemecoinTab] = useState<MemecoinTab>('favorites');
 
   // Get the embedded wallet address
   const embeddedWallet = wallets.find(w => w.walletClientType === 'privy');
@@ -103,21 +109,24 @@ const WalletScreen = () => {
             )}
           </div>
         </div>
-        <button className="wallet-logout-btn" onClick={handleLogout} title="Logout">
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round">
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-            <polyline points="16 17 21 12 16 7" />
-            <line x1="21" y1="12" x2="9" y2="12" />
-          </svg>
-        </button>
+        <div className="wallet-header-right">
+          <ChainSelector />
+          <button className="wallet-logout-btn" onClick={handleLogout} title="Logout">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Wallet Address Card */}
@@ -158,11 +167,11 @@ const WalletScreen = () => {
         </div>
         {walletAddress && (
           <a
-            href={`https://sepolia.basescan.org/address/${walletAddress}`}
+            href={`${chainConfig.explorerUrl}/address/${walletAddress}`}
             target="_blank"
             rel="noopener noreferrer"
             className="wallet-explorer-link">
-            View on BaseScan
+            View on {chainConfig.name === 'Base' ? 'BaseScan' : 'Sepolia BaseScan'}
             <svg
               width="10"
               height="10"
@@ -225,13 +234,32 @@ const WalletScreen = () => {
         </div>
       </div>
 
-      {/* Owned Memecoins Section */}
-      {walletAddress && (
-        <div className="wallet-memecoins-section">
-          <h3 className="wallet-section-title">Your Memecoins</h3>
-          <OwnedMemecoins walletAddress={walletAddress} />
+      {/* Memecoins Section with Tabs */}
+      <div className="wallet-memecoins-section">
+        <div className="memecoins-tabs">
+          <button
+            className={`memecoins-tab ${memecoinTab === 'favorites' ? 'active' : ''}`}
+            onClick={() => setMemecoinTab('favorites')}>
+            <StarIcon />
+            Reactions
+          </button>
+          <button
+            className={`memecoins-tab ${memecoinTab === 'created' ? 'active' : ''}`}
+            onClick={() => setMemecoinTab('created')}>
+            <CoinIcon />
+            Created
+          </button>
         </div>
-      )}
+        <div className="memecoins-tab-content">
+          {memecoinTab === 'favorites' && <FavoriteMemecoins />}
+          {memecoinTab === 'created' && walletAddress && <OwnedMemecoins walletAddress={walletAddress} />}
+          {memecoinTab === 'created' && !walletAddress && (
+            <div className="memecoins-empty">
+              <p>Connect wallet to view created memecoins</p>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
@@ -314,6 +342,36 @@ const CreateMemeIcon = () => (
     <path d="M8 14s1.5 2 4 2 4-2 4-2" />
     <line x1="9" y1="9" x2="9.01" y2="9" />
     <line x1="15" y1="9" x2="15.01" y2="9" />
+  </svg>
+);
+
+const StarIcon = () => (
+  <svg
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round">
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+  </svg>
+);
+
+const CoinIcon = () => (
+  <svg
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <path d="M12 6v12" />
+    <path d="M15 9.5a3 3 0 1 0 0 5H9" />
   </svg>
 );
 

@@ -73,7 +73,7 @@ const render = createRender(Mount, [InlineCSUIContainer], observer?.mountState, 
   root.render(
     <Layout>
       <InlineCSUIContainer anchor={anchor}>
-        <App anchor={anchor} rootContainer={rootContainer} />
+        <App />
       </InlineCSUIContainer>
     </Layout>,
   );
